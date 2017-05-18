@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Girish </title>
-    <link>/localhost/tags/golang/index.xml</link>
+    <link>/girish3.github.io/tags/golang/index.xml</link>
     <language>en-us</language>
     <author>Girish Budhwani</author>
     <rights>(C) 2017</rights>
@@ -12,10 +12,10 @@
       
         <item>
           <title>Example content</title>
-          <link>/localhost/2014/01/01/example-content/</link>
+          <link>/girish3.github.io/2014/01/01/example-content/</link>
           <pubDate>Wed, 01 Jan 2014 00:00:00 UTC</pubDate>
           <author>Girish Budhwani</author>
-          <guid>/localhost/2014/01/01/example-content/</guid>
+          <guid>/girish3.github.io/2014/01/01/example-content/</guid>
           <description>
 
 &lt;div class=&#34;message&#34;&gt;

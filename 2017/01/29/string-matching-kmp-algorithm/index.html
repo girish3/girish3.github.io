@@ -15,17 +15,17 @@
   </title>
 
   
-  <link rel="stylesheet" href="localhost/css/poole.css">
-  <link rel="stylesheet" href="localhost/css/syntax.css">
-  <link rel="stylesheet" href="localhost/css/lanyon.css">
+  <link rel="stylesheet" href="girish3.github.io/css/poole.css">
+  <link rel="stylesheet" href="girish3.github.io/css/syntax.css">
+  <link rel="stylesheet" href="girish3.github.io/css/lanyon.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Serif:400,400italic,700|PT+Sans:400">
 
   
-  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="localhost/assets/apple-touch-icon-144-precomposed.png">
-  <link rel="shortcut icon" href="localhost/assets/favicon.ico">
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="girish3.github.io/assets/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="girish3.github.io/assets/favicon.ico">
 
   
-  <link rel="alternate" type="application/rss+xml" title="RSS" href="localhost/atom.xml">
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="girish3.github.io/atom.xml">
 </head>
 
 
@@ -41,8 +41,8 @@
   </div>
 
   <nav class="sidebar-nav">
-    <a class="sidebar-nav-item " href="localhost/">Home</a>
-    <a class="sidebar-nav-item " href="localhost/post">Posts</a>
+    <a class="sidebar-nav-item " href="girish3.github.io/">Home</a>
+    <a class="sidebar-nav-item " href="girish3.github.io/post">Posts</a>
 
     
     
@@ -83,7 +83,7 @@
       <div class="masthead">
         <div class="container">
           <h3 class="masthead-title">
-            <a href="localhost/" title="Home">Girish</a>
+            <a href="girish3.github.io/" title="Home">Girish</a>
             <small>A Jekyll theme</small>
           </h3>
         </div>
@@ -97,20 +97,20 @@
   <span class="post-date">Jan 29 2017</span>
   <span class="post-date">
   	
-    	<span><a href="localhost/tags/kmp">kmp</a></span>
+    	<span><a href="girish3.github.io/tags/kmp">kmp</a></span>
   	
-    	<span><a href="localhost/tags/example">example</a></span>
+    	<span><a href="girish3.github.io/tags/example">example</a></span>
   	
   	</br>
   	
-  		<p><a href="localhost/2017/01/29/string-matching-kmp-algorithm/">String matching (KMP algorithm)</a></p>
+  		<p><a href="girish3.github.io/2017/01/29/string-matching-kmp-algorithm/">String matching (KMP algorithm)</a></p>
   	
-  		<p><a href="localhost/2014/01/01/example-content/">Example content</a></p>
+  		<p><a href="girish3.github.io/2014/01/01/example-content/">Example content</a></p>
   	
   </span>
   
 
-<p><img src="localhost/images/cover_img.jpg" width="720" height="250"></p>
+<p><img src="girish3.github.io/images/cover_img.jpg" width="720" height="250"></p>
 
 <p>The string matching problem also known as “the needle in a haystack” is one of the classics. This simple problem has a lot of application in the areas of Information Security, Pattern Recognition, Document Matching, Bioinformatics (DNA matching) and many more. Finding a linear time algorithm was a challenge, then came our father <em>Donald Knuth</em> and <em>Vaughan Pratt</em> conceiving a linear time solution in 1970 by thoroughly analysing the naive approach. It was also independently discovered by <em>James Morris</em> in the same year. The three published the paper jointly in 1977 and from that point on it is known as the <em>Knuth-Morris-Pratt</em> aka KMP Algorithm.</p>
 
@@ -124,7 +124,7 @@ To Find the occurrences of a word <strong>W</strong> within a main text <strong>
 <p><strong>T: DoYouSeeADogHere</strong> (it will be a case insensitive search for all examples)<br />
 <strong>W: dog</strong></p>
 
-<p><img src="localhost/images/img1.jpg" width="720"></p>
+<p><img src="girish3.github.io/images/img1.jpg" width="720"></p>
 
 <div class="highlight"><pre><code class="language-python" data-lang="python"><span></span><span class="c1"># Here is the working code of the naive approach.</span>
 <span class="k">def</span> <span class="nf">bruteSearch</span><span class="p">(</span><span class="n">W</span><span class="p">,</span> <span class="n">T</span><span class="p">):</span>
@@ -168,7 +168,7 @@ To Find the occurrences of a word <strong>W</strong> within a main text <strong>
 <p><strong>T: duceDuck</strong><br />
 <strong>W: duck</strong></p>
 
-<p><img src="localhost/images/img2.jpg" width="400"  ></p>
+<p><img src="girish3.github.io/images/img2.jpg" width="400"  ></p>
 
 <p>As you can see in the above image, there is a mismatch at index 3. According to naive approach next step would be to shift W by 1. Since all letters in W are different, we can actually shift W by the index where mismatch occurred (3 in this case). We can say for sure there won’t be any match in between. I would recommend to try with some other similar example and check for yourself.</p>
 
@@ -177,11 +177,11 @@ To Find the occurrences of a word <strong>W</strong> within a main text <strong>
 <p><strong>T: deadElephant</strong><br />
 <strong>W: deadEye</strong></p>
 
-<p><img src="localhost/images/img3.jpg" width="720"></p>
+<p><img src="girish3.github.io/images/img3.jpg" width="720"></p>
 
 <p>Make sure you understand what <strong>green cells</strong> convey. I will be using a lot of them. In the above image the green cells in the left substring is equal to the green cells in the right substring. It is actually the largest prefix which is also equal to the suffix of the substring till index 4 of the word “deadeye”. Assume for now we have found it somehow, we will work on finding out largest prefix(green cells) later. Now let&rsquo;s see how it works by taking an abstract example.</p>
 
-<p><img src="localhost/images/img4.jpg" width="600"></p>
+<p><img src="girish3.github.io/images/img4.jpg" width="600"></p>
 
 <p>str1 = str2 (green cells) and str2 = str3. When there is a mismatch after str2, we can directly shift the word till after str1 as you can see in the image. <em>Green cells actually tell us the index from where it should start comparing next, if there is a mismatch.</em></p>
 
@@ -193,7 +193,7 @@ To Find the occurrences of a word <strong>W</strong> within a main text <strong>
 
 <p><strong>W: acabacacd</strong></p>
 
-<p><img src="localhost/images/img5.jpg" width="600"></p>
+<p><img src="girish3.github.io/images/img5.jpg" width="600"></p>
 
 <p><code>m</code> and <code>i</code> define the state of our algorithm and signify that prefix of the word W before <code>m</code> is equal to the suffix for the substring till <code>i-1</code> i.e <code>W[0…m-1] = W[i-m…i-1]</code>. For the above image state, 2(value of <code>m</code>) is stored in the aux[] array for the substring till index 4(<code>i-1</code>).
 <div class="highlight"><pre><code class="language-python" data-lang="python"><span></span><span class="k">def</span> <span class="nf">createAux</span><span class="p">(</span><span class="n">W</span><span class="p">):</span>
@@ -231,7 +231,7 @@ To Find the occurrences of a word <strong>W</strong> within a main text <strong>
 
 <p>Following will be the aux array for the word <em>acabacacd</em></p>
 
-<p><img src="localhost/images/img6.jpg" width="600"></p>
+<p><img src="girish3.github.io/images/img6.jpg" width="600"></p>
 
 <p>Now let&rsquo;s use the above aux array to search the word <em>acabacacd</em> in the following text.</p>
 
@@ -274,7 +274,7 @@ To Find the occurrences of a word <strong>W</strong> within a main text <strong>
 
 <p>Below is the snapshot of above code at some intermediate running state.</p>
 
-<p><img src="localhost/images/img7.jpg" width="600"></p>
+<p><img src="girish3.github.io/images/img7.jpg" width="600"></p>
 
 <p>You just nailed Knuth-Morris-Pratt algorithm.</p>
 
@@ -286,9 +286,9 @@ As I said this is my first blog in the series, if you have any suggestion on how
 <div id="disqus_thread"></div>
 <script type="text/javascript">
     var disqus_shortname = 'girishb';
-    var disqus_identifier = '\/localhost\/2017\/01\/29\/string-matching-kmp-algorithm\/';
+    var disqus_identifier = '\/girish3.github.io\/2017\/01\/29\/string-matching-kmp-algorithm\/';
     var disqus_title = 'String matching (KMP algorithm)';
-    var disqus_url = '\/localhost\/2017\/01\/29\/string-matching-kmp-algorithm\/';
+    var disqus_url = '\/girish3.github.io\/2017\/01\/29\/string-matching-kmp-algorithm\/';
 
     (function() {
         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
