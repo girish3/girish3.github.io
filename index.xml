@@ -18,7 +18,7 @@
           <guid>/girish3.github.io/2017/01/29/string-matching-kmp-algorithm/</guid>
           <description>
 
-&lt;p&gt;&lt;img src=&#34;girish3.github.io/images/cover_img.jpg&#34; width=&#34;720&#34; height=&#34;250&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;./images/cover_img.jpg&#34; width=&#34;720&#34; height=&#34;250&#34;&gt;&lt;/p&gt;
 
 &lt;p&gt;The string matching problem also known as “the needle in a haystack” is one of the classics. This simple problem has a lot of application in the areas of Information Security, Pattern Recognition, Document Matching, Bioinformatics (DNA matching) and many more. Finding a linear time algorithm was a challenge, then came our father &lt;em&gt;Donald Knuth&lt;/em&gt; and &lt;em&gt;Vaughan Pratt&lt;/em&gt; conceiving a linear time solution in 1970 by thoroughly analysing the naive approach. It was also independently discovered by &lt;em&gt;James Morris&lt;/em&gt; in the same year. The three published the paper jointly in 1977 and from that point on it is known as the &lt;em&gt;Knuth-Morris-Pratt&lt;/em&gt; aka KMP Algorithm.&lt;/p&gt;
 
@@ -32,7 +32,7 @@ To Find the occurrences of a word &lt;strong&gt;W&lt;/strong&gt; within a main t
 &lt;p&gt;&lt;strong&gt;T: DoYouSeeADogHere&lt;/strong&gt; (it will be a case insensitive search for all examples)&lt;br /&gt;
 &lt;strong&gt;W: dog&lt;/strong&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;girish3.github.io/images/img1.jpg&#34; width=&#34;720&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;./images/img1.jpg&#34; width=&#34;720&#34;&gt;&lt;/p&gt;
 
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;# Here is the working code of the naive approach.&lt;/span&gt;
 &lt;span class=&#34;k&#34;&gt;def&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;bruteSearch&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;W&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;T&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;):&lt;/span&gt;
@@ -76,7 +76,7 @@ To Find the occurrences of a word &lt;strong&gt;W&lt;/strong&gt; within a main t
 &lt;p&gt;&lt;strong&gt;T: duceDuck&lt;/strong&gt;&lt;br /&gt;
 &lt;strong&gt;W: duck&lt;/strong&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;girish3.github.io/images/img2.jpg&#34; width=&#34;400&#34;  &gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;./images/img2.jpg&#34; width=&#34;400&#34;  &gt;&lt;/p&gt;
 
 &lt;p&gt;As you can see in the above image, there is a mismatch at index 3. According to naive approach next step would be to shift W by 1. Since all letters in W are different, we can actually shift W by the index where mismatch occurred (3 in this case). We can say for sure there won’t be any match in between. I would recommend to try with some other similar example and check for yourself.&lt;/p&gt;
 
@@ -85,11 +85,11 @@ To Find the occurrences of a word &lt;strong&gt;W&lt;/strong&gt; within a main t
 &lt;p&gt;&lt;strong&gt;T: deadElephant&lt;/strong&gt;&lt;br /&gt;
 &lt;strong&gt;W: deadEye&lt;/strong&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;girish3.github.io/images/img3.jpg&#34; width=&#34;720&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;./images/img3.jpg&#34; width=&#34;720&#34;&gt;&lt;/p&gt;
 
 &lt;p&gt;Make sure you understand what &lt;strong&gt;green cells&lt;/strong&gt; convey. I will be using a lot of them. In the above image the green cells in the left substring is equal to the green cells in the right substring. It is actually the largest prefix which is also equal to the suffix of the substring till index 4 of the word “deadeye”. Assume for now we have found it somehow, we will work on finding out largest prefix(green cells) later. Now let&amp;rsquo;s see how it works by taking an abstract example.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;girish3.github.io/images/img4.jpg&#34; width=&#34;600&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;./images/img4.jpg&#34; width=&#34;600&#34;&gt;&lt;/p&gt;
 
 &lt;p&gt;str1 = str2 (green cells) and str2 = str3. When there is a mismatch after str2, we can directly shift the word till after str1 as you can see in the image. &lt;em&gt;Green cells actually tell us the index from where it should start comparing next, if there is a mismatch.&lt;/em&gt;&lt;/p&gt;
 
@@ -101,7 +101,7 @@ To Find the occurrences of a word &lt;strong&gt;W&lt;/strong&gt; within a main t
 
 &lt;p&gt;&lt;strong&gt;W: acabacacd&lt;/strong&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;girish3.github.io/images/img5.jpg&#34; width=&#34;600&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;./images/img5.jpg&#34; width=&#34;600&#34;&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;code&gt;m&lt;/code&gt; and &lt;code&gt;i&lt;/code&gt; define the state of our algorithm and signify that prefix of the word W before &lt;code&gt;m&lt;/code&gt; is equal to the suffix for the substring till &lt;code&gt;i-1&lt;/code&gt; i.e &lt;code&gt;W[0…m-1] = W[i-m…i-1]&lt;/code&gt;. For the above image state, 2(value of &lt;code&gt;m&lt;/code&gt;) is stored in the aux[] array for the substring till index 4(&lt;code&gt;i-1&lt;/code&gt;).
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;def&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;createAux&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;W&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;):&lt;/span&gt;
@@ -139,7 +139,7 @@ To Find the occurrences of a word &lt;strong&gt;W&lt;/strong&gt; within a main t
 
 &lt;p&gt;Following will be the aux array for the word &lt;em&gt;acabacacd&lt;/em&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;girish3.github.io/images/img6.jpg&#34; width=&#34;600&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;./images/img6.jpg&#34; width=&#34;600&#34;&gt;&lt;/p&gt;
 
 &lt;p&gt;Now let&amp;rsquo;s use the above aux array to search the word &lt;em&gt;acabacacd&lt;/em&gt; in the following text.&lt;/p&gt;
 
@@ -182,7 +182,7 @@ To Find the occurrences of a word &lt;strong&gt;W&lt;/strong&gt; within a main t
 
 &lt;p&gt;Below is the snapshot of above code at some intermediate running state.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;girish3.github.io/images/img7.jpg&#34; width=&#34;600&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;./images/img7.jpg&#34; width=&#34;600&#34;&gt;&lt;/p&gt;
 
 &lt;p&gt;You just nailed Knuth-Morris-Pratt algorithm.&lt;/p&gt;
 
@@ -208,7 +208,7 @@ As I said this is my first blog in the series, if you have any suggestion on how
 &lt;p&gt;Poole is the Jekyll Butler, serving as an upstanding and effective foundation for Jekyll themes by &lt;a href=&#34;https://twitter.com/mdo&#34;&gt;@mdo&lt;/a&gt;. Poole, and every theme built on it (like Lanyon here) includes the following:&lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;Complete Jekyll setup included (layouts, config, &lt;a href=&#34;girish3.github.io/404&#34;&gt;404&lt;/a&gt;, &lt;a href=&#34;girish3.github.io/index.xml&#34;&gt;RSS feed&lt;/a&gt;, posts, and &lt;a href=&#34;girish3.github.io/about&#34;&gt;example page&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;Complete Jekyll setup included (layouts, config, &lt;a href=&#34;./404&#34;&gt;404&lt;/a&gt;, &lt;a href=&#34;./index.xml&#34;&gt;RSS feed&lt;/a&gt;, posts, and &lt;a href=&#34;./about&#34;&gt;example page&lt;/a&gt;)&lt;/li&gt;
 &lt;li&gt;Mobile friendly design and development&lt;/li&gt;
 &lt;li&gt;Easily scalable text and component sizing with &lt;code&gt;rem&lt;/code&gt; units in the CSS&lt;/li&gt;
 &lt;li&gt;Support for a wide gamut of HTML elements&lt;/li&gt;
