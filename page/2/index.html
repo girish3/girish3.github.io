@@ -73,6 +73,8 @@
     
       
     
+      
+    
 
     <a class="sidebar-nav-item" href="https://github.com/girish3">Github</a>
   </nav>
@@ -103,36 +105,33 @@
 <div class="posts">
   
     <div class="post">
+        <h1 class="post-title"><a href="https://girish3.github.io/2014/01/02/introducing-lanyon/">Introducing Lanyon</a></h1>
+        <span class="post-date">Jan 2 2014</span>
+        
+        Lanyon is an unassuming Jekyll theme that places content first by tucking away navigation in a hidden drawer. It&rsquo;s based on Poole, the Jekyll butler.
+Built on Poole Poole is the Jekyll Butler, serving as an upstanding and effective foundation for Jekyll themes by @mdo. Poole, and every theme built on it (like Lanyon here) includes the following:
+ Complete Jekyll setup included (layouts, config, 404, RSS feed, posts, and example page) Mobile friendly design and development Easily scalable text and component sizing with rem units in the CSS Support for a wide gamut of HTML elements Related posts (time-based, because Jekyll) below each post Syntax highlighting, courtesy Pygments (the Python-based code snippet highlighter)  Lanyon features In addition to the features of Poole, Lanyon adds the following:
+        <span class="read-more-link">
+          <a href="2014/01/02/introducing-lanyon/">Read More…</a>
+        </span>
+    </div>
+  
+    <div class="post">
         <h1 class="post-title"><a href="https://girish3.github.io/2014/01/01/example-content/">Example content</a></h1>
         <span class="post-date">Jan 1 2014</span>
         
         Howdy! This is an example blog post that shows several types of HTML content supported in this theme.  Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Sed posuere consectetur est at lobortis. Cras mattis consectetur purus sit amet fermentum.
  Curabitur blandit tempus porttitor. Nullam quis risus eget urna mollis ornare vel eu leo.
-        
-          <div class="read-more-link">
-            <a href="2014/01/01/example-content/">Read More…</a>
-          </div>
-        
-    </div>
-  
-    <div class="post">
-        <h1 class="post-title"><a href="https://girish3.github.io/2013/12/31/whats-jekyll/">What&#39;s Jekyll?</a></h1>
-        <span class="post-date">Dec 31 2013</span>
-        
-        Jekyll is a static site generator, an open-source tool for creating simple yet powerful websites of all shapes and sizes. From the project&rsquo;s readme:
- Jekyll is a simple, blog aware, static site generator. It takes a template directory [&hellip;] and spits out a complete, static website suitable for serving with Apache or your favorite web server. This is also the engine behind GitHub Pages, which you can use to host your project’s page or blog right here from GitHub.
-        
-          <div class="read-more-link">
-            <a href="2013/12/31/whats-jekyll/">Read More…</a>
-          </div>
-        
+        <span class="read-more-link">
+          <a href="2014/01/01/example-content/">Read More…</a>
+        </span>
     </div>
   
 </div>
 
 <div class="pagination">
   
-  <span class="pagination-item older">Older</span>
+  <a class="pagination-item older" href="/page/3/">Older</a>
   
 
   
@@ -145,6 +144,24 @@
 
     <label for="sidebar-checkbox" class="sidebar-toggle"></label>
 
+ 	<script>
+      (function(document) {
+        var toggle = document.querySelector('.sidebar-toggle');
+        var sidebar = document.querySelector('#sidebar');
+        var checkbox = document.querySelector('#sidebar-checkbox');
+
+        document.addEventListener('click', function(e) {
+          var target = e.target;
+
+          if(!checkbox.checked ||
+             sidebar.contains(target) ||
+             (target === checkbox || target === toggle)) return;
+
+          checkbox.checked = false;
+        }, false);
+      })(document);
+    </script>
   </body>
+
 </html>
 

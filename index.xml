@@ -196,6 +196,74 @@ As I said this is my first blog in the series, if you have any suggestion on how
     
       
         <item>
+          <title>Markdown Basics</title>
+          <link>https://girish3.github.io/2017/01/20/markdown-basics/</link>
+          <pubDate>Fri, 20 Jan 2017 00:00:00 UTC</pubDate>
+          <author>Girish Budhwani</author>
+          <guid>https://girish3.github.io/2017/01/20/markdown-basics/</guid>
+          <description>
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;The following line is bold&lt;br /&gt;
+&lt;strong&gt;Hi, I am Bold&lt;/strong&gt;&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;The following line is given &lt;strong&gt;emphasis&lt;/strong&gt;&lt;br /&gt;
+&lt;em&gt;I am cooool.&lt;/em&gt;&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;To write something on the &lt;strong&gt;new line&lt;/strong&gt;, give two spaces and hit enter&lt;br /&gt;
+Yay! we are on the next line&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Now comes the &lt;strong&gt;Headline&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h1 id=&#34;what-s-up-people&#34;&gt;What&amp;rsquo;s up people?&lt;/h1&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Bit smaller &lt;strong&gt;Headline&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;don-t-judge-me&#34;&gt;Don&amp;rsquo;t judge me&lt;/h2&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Even smaller &lt;strong&gt;Headline&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;not-so-tiny-aye&#34;&gt;Not so tiny, aye&lt;/h3&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;You can also &lt;strong&gt;strikethrough&lt;/strong&gt; using two tildes&lt;br /&gt;
+&lt;del&gt;I can never be happy :(&lt;/del&gt;&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;How can markdown be complete without &lt;strong&gt;links&lt;/strong&gt;.&lt;br /&gt;
+&lt;a href=&#34;https://www.google.com&#34;&gt;guess the link&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Next comes the &lt;strong&gt;inline code&lt;/strong&gt;&lt;br /&gt;
+This line has &lt;code&gt;inline&lt;/code&gt; code &lt;code&gt;callback()&lt;/code&gt;&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;The &lt;strong&gt;block of code&lt;/strong&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;# this is python
+s = &amp;quot;Python syntax highlighting&amp;quot;
+print s
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;blockquote&gt;
+&lt;p&gt;The &lt;strong&gt;blockquote&lt;/strong&gt;&lt;br /&gt;
+with the new line&lt;/p&gt;
+&lt;/blockquote&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Raw html also works.&lt;br /&gt;
+&lt;strong&gt;I am strong&lt;/strong&gt;&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;h2 id=&#34;the-horizontal-ruler&#34;&gt;The &lt;strong&gt;horizontal ruler&lt;/strong&gt;&lt;/h2&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;And the &lt;strong&gt;image&lt;/strong&gt;
+&lt;img src=&#34;https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png&#34; alt=&#34;alt text&#34; title=&#34;Logo Title Text 1&#34; /&gt;&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Image with a width of 500&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/images/dexter.png&#34; width=&#34;500&#34;&gt;&lt;/p&gt;
+</description>
+        </item>
+      
+    
+      
+        <item>
           <title>Introducing Lanyon</title>
           <link>https://girish3.github.io/2014/01/02/introducing-lanyon/</link>
           <pubDate>Thu, 02 Jan 2014 00:00:00 UTC</pubDate>

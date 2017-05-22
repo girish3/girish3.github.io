@@ -73,6 +73,8 @@
     
       
     
+      
+    
 
     <a class="sidebar-nav-item" href="https://github.com/girish3">Github</a>
   </nav>
@@ -106,26 +108,29 @@
         <h1 class="post-title"><a href="https://girish3.github.io/2017/01/29/string-matching-kmp-algorithm/">String matching (KMP algorithm)</a></h1>
         <span class="post-date">Jan 29 2017</span>
         
-        The string matching problem also known as “the needle in a haystack” is one of the classics. This simple problem has a lot of application in the areas of Information Security, Pattern Recognition, Document Matching, Bioinformatics (DNA matching) and many more. Finding a linear time algorithm was a challenge, then came our father Donald Knuth and Vaughan Pratt conceiving a linear time solution in 1970 by thoroughly analysing the naive approach.
-        
-          <div class="read-more-link">
-            <a href="2017/01/29/string-matching-kmp-algorithm/">Read More…</a>
-          </div>
-        
+        The string matching problem also known as <em>the needle in a haystack</em> is one of the classics. This simple problem has a lot of application in the areas of Information Security, Pattern Recognition, Document Matching, Bioinformatics (DNA matching) and many more. Finding a linear time algorithm was a challenge, then
+        <span class="read-more-link">
+          <a href="2017/01/29/string-matching-kmp-algorithm/">Read More…</a>
+        </span>
     </div>
   
     <div class="post">
-        <h1 class="post-title"><a href="https://girish3.github.io/2014/01/02/introducing-lanyon/">Introducing Lanyon</a></h1>
-        <span class="post-date">Jan 2 2014</span>
+        <h1 class="post-title"><a href="https://girish3.github.io/2017/01/20/markdown-basics/">Markdown Basics</a></h1>
+        <span class="post-date">Jan 20 2017</span>
         
-        Lanyon is an unassuming Jekyll theme that places content first by tucking away navigation in a hidden drawer. It&rsquo;s based on Poole, the Jekyll butler.
-Built on Poole Poole is the Jekyll Butler, serving as an upstanding and effective foundation for Jekyll themes by @mdo. Poole, and every theme built on it (like Lanyon here) includes the following:
- Complete Jekyll setup included (layouts, config, 404, RSS feed, posts, and example page) Mobile friendly design and development Easily scalable text and component sizing with rem units in the CSS Support for a wide gamut of HTML elements Related posts (time-based, because Jekyll) below each post Syntax highlighting, courtesy Pygments (the Python-based code snippet highlighter)  Lanyon features In addition to the features of Poole, Lanyon adds the following:
-        
-          <div class="read-more-link">
-            <a href="2014/01/02/introducing-lanyon/">Read More…</a>
-          </div>
-        
+        The following line is bold
+Hi, I am Bold
+ The following line is given emphasis
+I am cooool.
+ To write something on the new line, give two spaces and hit enter
+Yay! we are on the next line
+ Now comes the Headline
+What&rsquo;s up people? Bit smaller Headline
+Don&rsquo;t judge me Even smaller Headline
+Not so tiny, aye You can also strikethrough using two tildes
+        <span class="read-more-link">
+          <a href="2017/01/20/markdown-basics/">Read More…</a>
+        </span>
     </div>
   
 </div>
@@ -145,6 +150,24 @@ Built on Poole Poole is the Jekyll Butler, serving as an upstanding and effectiv
 
     <label for="sidebar-checkbox" class="sidebar-toggle"></label>
 
+ 	<script>
+      (function(document) {
+        var toggle = document.querySelector('.sidebar-toggle');
+        var sidebar = document.querySelector('#sidebar');
+        var checkbox = document.querySelector('#sidebar-checkbox');
+
+        document.addEventListener('click', function(e) {
+          var target = e.target;
+
+          if(!checkbox.checked ||
+             sidebar.contains(target) ||
+             (target === checkbox || target === toggle)) return;
+
+          checkbox.checked = false;
+        }, false);
+      })(document);
+    </script>
   </body>
+
 </html>
 
