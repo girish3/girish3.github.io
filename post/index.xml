@@ -6,8 +6,202 @@
     <language>en-us</language>
     <author>Girish Budhwani</author>
     <rights>(C) 1</rights>
-    <updated>2017-01-29 00:00:00 &#43;0000 UTC</updated>
+    <updated>2017-05-28 00:00:00 &#43;0000 UTC</updated>
 
+    
+      
+        <item>
+          <title>The problem with OOP and how Golang solves it.</title>
+          <link>https://girish3.github.io/2017/05/28/the-problem-with-oop-and-how-golang-solves-it./</link>
+          <pubDate>Sun, 28 May 2017 00:00:00 UTC</pubDate>
+          <author>Girish Budhwani</author>
+          <guid>https://girish3.github.io/2017/05/28/the-problem-with-oop-and-how-golang-solves-it./</guid>
+          <description>
+
+&lt;p&gt;&lt;img src=&#34;https://girish3.github.io/images/golang.jpg&#34; width=&#34;720&#34;&gt;&lt;/p&gt;
+
+&lt;p&gt;We have been using OOP paradigm for few decades now and the so called three pillars of OOP &amp;ndash; Inheritance, polymorphism and encapsulation, they seem to be essential and useful but they have an inherent problem. The problem so grave that if not handled well it will stick to your codebase like a cancer. It will make your code more resistance to change and anti-patterns will creep in. In this article, we will peek into the world of Go programming language and how it handles those issues in a very elegant fashion. I have been using Go for few months now and I consider myself novice so feel free to bash. Without further ado, let’s target each of the cracked pillars of OOP.&lt;/p&gt;
+
+&lt;h1 id=&#34;inheritance&#34;&gt;Inheritance&lt;/h1&gt;
+
+&lt;p&gt;The concept of inheritance is so natural. We never separate code reuse from inheritance, they go hand in hand and yet we would think what can possibly be wrong with inheritance.&lt;/p&gt;
+
+&lt;h2 id=&#34;the-fragile-base-class-problem&#34;&gt;The Fragile Base Class Problem&lt;/h2&gt;
+
+&lt;h3 id=&#34;oo-s-way&#34;&gt;OO’s way&lt;/h3&gt;
+
+&lt;p&gt;It may happen that even if you din’t make any change in your class and yet your code breaks.
+Guess what? Change was actually done in the class you inherited from !!! Yes, it could happen and that’s the Fragile Base Class problem. It’s a very probable scenario that after you update your library dependency, it can bring some side effects because the library class you inherited from was changed. Let’s see it in action.&lt;/p&gt;
+
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;// the example is in Java&lt;/span&gt;
+&lt;span class=&#34;kd&#34;&gt;class&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;Base&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;
+
+  &lt;span class=&#34;kd&#34;&gt;private&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;i&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;;&lt;/span&gt;
+
+  &lt;span class=&#34;kt&#34;&gt;void&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;inc1&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;
+    &lt;span class=&#34;n&#34;&gt;i&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;++;&lt;/span&gt;
+  &lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
+
+  &lt;span class=&#34;kt&#34;&gt;void&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;inc2&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;
+    &lt;span class=&#34;n&#34;&gt;i&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;++;&lt;/span&gt;
+  &lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
+
+&lt;span class=&#34;kd&#34;&gt;class&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;Child&lt;/span&gt; &lt;span class=&#34;kd&#34;&gt;extends&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Base&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;
+  &lt;span class=&#34;nd&#34;&gt;@Override&lt;/span&gt;
+  &lt;span class=&#34;kt&#34;&gt;void&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;inc2&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;
+    &lt;span class=&#34;n&#34;&gt;inc1&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;();&lt;/span&gt;
+  &lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;The above example is straight forward, &lt;code&gt;inc2()&lt;/code&gt; method is overridden, it will call &lt;code&gt;inc1()&lt;/code&gt; of base class and thus incrementing &lt;code&gt;i&lt;/code&gt; by 1. Let’s make a simple change in our Base class.&lt;/p&gt;
+
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;// the example is in Java&lt;/span&gt;
+&lt;span class=&#34;kd&#34;&gt;class&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;Base&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;
+
+  &lt;span class=&#34;kd&#34;&gt;private&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;i&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;;&lt;/span&gt;
+
+  &lt;span class=&#34;kt&#34;&gt;void&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;inc1&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;
+    &lt;span class=&#34;n&#34;&gt;inc2&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;();&lt;/span&gt;  &lt;span class=&#34;c1&#34;&gt;// the change&lt;/span&gt;
+  &lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
+
+  &lt;span class=&#34;kt&#34;&gt;void&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;inc2&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;
+    &lt;span class=&#34;n&#34;&gt;i&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;++;&lt;/span&gt;
+  &lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
+
+&lt;span class=&#34;kd&#34;&gt;class&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;Child&lt;/span&gt; &lt;span class=&#34;kd&#34;&gt;extends&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Base&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;
+  &lt;span class=&#34;nd&#34;&gt;@Override&lt;/span&gt;
+  &lt;span class=&#34;kt&#34;&gt;void&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;inc2&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;
+    &lt;span class=&#34;n&#34;&gt;inc1&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;();&lt;/span&gt;
+  &lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;&lt;code&gt;inc1()&lt;/code&gt; method of Base class will now actually call an overridden &lt;code&gt;inc2()&lt;/code&gt; method and your program will be stuck in an infinite loop!! Inheritance is flawed.&lt;/p&gt;
+
+&lt;p&gt;This is such a simple and effective demonstration for a case where you really have to dig up the source of the parent class in order to find out the cause for the unexpected behaviour. One way to solve the issue is to use Composition, but OOP languages do not make it easy to compose objects. They are made to make inheritance easy.&lt;/p&gt;
+
+&lt;h3 id=&#34;go-s-way&#34;&gt;GO’s way&lt;/h3&gt;
+
+&lt;p&gt;First of all, we cannot call Go an OOP language, it has structs (like C) and there are functions which you define on those structs (unlike C). If you combine the two then roughly you can call it a class. Here is a shocker &amp;ndash; &lt;strong&gt;there is no inheritance in Go&lt;/strong&gt; but what you can do is compose objects (structs) very easily using struct embedding. Let&amp;rsquo;s take an example.&lt;/p&gt;
+
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-Go&#34; data-lang=&#34;Go&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;// Go’s syntax is very much like C, you should be fine &lt;/span&gt;
+&lt;span class=&#34;c1&#34;&gt;// reading it.&lt;/span&gt;
+
+&lt;span class=&#34;c1&#34;&gt;// Defining Human type, it has a variable Name of type string. &lt;/span&gt;
+&lt;span class=&#34;c1&#34;&gt;// (Yes, type is mentioned after variable name)&lt;/span&gt;
+&lt;span class=&#34;kd&#34;&gt;type&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;Human&lt;/span&gt; &lt;span class=&#34;kd&#34;&gt;struct&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+     &lt;span class=&#34;nx&#34;&gt;Name&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;string&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+
+&lt;span class=&#34;c1&#34;&gt;// Defining a method GetName on the type Human which &lt;/span&gt;
+&lt;span class=&#34;c1&#34;&gt;// returns a string.&lt;/span&gt;
+&lt;span class=&#34;kd&#34;&gt;func&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;h&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;Human&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;GetName&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;string&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+     &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;h&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;Name&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+
+&lt;span class=&#34;c1&#34;&gt;// Human struct is embedded within Student, this is not &lt;/span&gt;
+&lt;span class=&#34;c1&#34;&gt;// inheritance but composition. Composition can also be done&lt;/span&gt;
+&lt;span class=&#34;c1&#34;&gt;// in a usual way by creating a Human type variable but there&lt;/span&gt;
+&lt;span class=&#34;c1&#34;&gt;// are few advantages to using struct embedding.&lt;/span&gt;
+&lt;span class=&#34;kd&#34;&gt;type&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;Student&lt;/span&gt; &lt;span class=&#34;kd&#34;&gt;struct&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+    &lt;span class=&#34;nx&#34;&gt;id&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;int&lt;/span&gt;
+    &lt;span class=&#34;nx&#34;&gt;Human&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+
+&lt;span class=&#34;nx&#34;&gt;human&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;:=&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;Human&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;quot;John&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;// type is implicit&lt;/span&gt;
+&lt;span class=&#34;nx&#34;&gt;student&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;:=&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;Student&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;human&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+
+&lt;span class=&#34;c1&#34;&gt;// you can actually do the following, even though getName() is&lt;/span&gt;
+&lt;span class=&#34;c1&#34;&gt;// Human&amp;#39;s method.&lt;/span&gt;
+&lt;span class=&#34;nx&#34;&gt;student&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;GetName&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Thanks to method promotion, &lt;code&gt;GetName()&lt;/code&gt; method of type Human can be called directly on the Student type. In Java, we would have had to create a wrapper to call on methods of Human (extra work).&lt;/p&gt;
+
+&lt;div class=&#34;message&#34;&gt;
+    When we embed a type, the methods of that type become methods of the outer type, but when they are invoked, the receiver of the method is the inner type, not the outer one. &lt;/br&gt; 
+    &lt;i&gt;— Effective Go book&lt;/i&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Had we implemented the fragile base class example in Go, then &lt;code&gt;inc1()&lt;/code&gt; method of base class would have called its own &lt;code&gt;inc2()&lt;/code&gt; method and thus it wouldn’t have caused the issue in the first place.&lt;/p&gt;
+
+&lt;p&gt;Go’s struct embedding is amazing. It disguises composition as inheritance and it is much more powerful than a class-based inheritance model, as it allows a much greater degree of flexibility.&lt;/p&gt;
+
+&lt;h2 id=&#34;testing&#34;&gt;Testing&lt;/h2&gt;
+
+&lt;h3 id=&#34;oo-s-way-1&#34;&gt;OO’s way&lt;/h3&gt;
+
+&lt;p&gt;Better testing can be done if the classes are composed rather than inherited. If one class is composed of another class, mock objects can be easily created to do the testing of target class. Inheritance doesn&amp;rsquo;t provide this luxury. In order to test derived class, you must need its super class. If your codebase has multi-tiered inheritance structure then you will need hell a lot of classes to do a testing of a mere sub class.&lt;/p&gt;
+
+&lt;div class=&#34;message&#34;&gt;
+    The problem with object-oriented languages is they’ve got all this implicit environment that they carry around with them. You wanted a banana but what you got was a gorilla holding the banana and the entire jungle. &lt;/br&gt; &lt;i&gt;— Joe Armstrong&lt;/i&gt;
+&lt;/div&gt;
+
+&lt;h3 id=&#34;go-s-way-1&#34;&gt;GO’s way&lt;/h3&gt;
+
+&lt;p&gt;Well, Go doesn’t support inheritance so you have no other way but to compose (embed) objects.&lt;/p&gt;
+
+&lt;h2 id=&#34;the-diamond-problem&#34;&gt;The Diamond Problem&lt;/h2&gt;
+
+&lt;h3 id=&#34;oo-s-way-2&#34;&gt;OO’s way&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://girish3.github.io/images/multiple_inheritance.png&#34; width=&#34;400&#34; style=&#34;margin: auto&#34;&gt;&lt;/p&gt;
+
+&lt;p&gt;The above example makes logical sense and is a use case of having multiple inheritance. Scanner and printer inherit from PD (PoweredDevice), and Copier inherits from both Scanner and Printer. There is a method in PD that Scanner and Printer have overridden. Now the issue is which method will Copier inherit? that of Scanner or Printer? Most OOP languages do not support multiple inheritance, but the ones which do, like C++, has a complex approach and requires explicitly stating which parent class the method to be used.&lt;/p&gt;
+
+&lt;h3 id=&#34;go-s-way-2&#34;&gt;GO’s way&lt;/h3&gt;
+
+&lt;p&gt;Scanner and Printer type can be embedded in Copier and a start() method can be added in Copier to decide which method to be called, so again, composition is the solution and it&amp;rsquo;s not something unique to Go, just that it makes composition easier.&lt;/p&gt;
+
+&lt;h1 id=&#34;encapsulation&#34;&gt;Encapsulation&lt;/h1&gt;
+
+&lt;p&gt;The concept of encapsulation is also inspired from the real world, all the inner workings of the things around you like TV, laptop or your phone is hidden from the outside world. You only interact with them through an interface. The ability of a class to hide its data and methods is Encapsulation. So what’s the problem? Well, encapsulation is all good but the way it is implemented in OOP languages is a problem.&lt;/p&gt;
+
+&lt;h3 id=&#34;oo-s-way-3&#34;&gt;OO’s way&lt;/h3&gt;
+
+&lt;p&gt;We generally pass objects by reference, if we pass it to a constructor, then set it to a private variable of a class then that object is in fact not safe. Keeping that object’s reference outside class is dangerous. Since Java and many other languages do not differentiate between a reference and an actual data, a class can never know whether it’s private members can be changed from outside. Dirty work around could be to always copy the passed object in the constructor.&lt;/p&gt;
+
+&lt;p&gt;There is another issue that we have already seen in fragile base class problem and is summarised really well in the design patterns bible:&lt;/p&gt;
+
+&lt;div class=&#34;message&#34;&gt;
+Because inheritance exposes a subclass to details of its parent&#39;s implementation, it&#39;s often said that &#34;inheritance breaks encapsulation&#34; &lt;/br&gt;
+&lt;i&gt;— Gang of Four, Design Patterns&lt;/i&gt;
+&lt;/div&gt;
+
+&lt;h3 id=&#34;go-s-way-3&#34;&gt;GO’s way&lt;/h3&gt;
+
+&lt;p&gt;Pointers to the rescue. Go has pointers (like C) but there is no pointer arithmetic, in case you are scared. Objects can be passed by pointer or by value, since both are of different types, a class (struct) can define itself to either expect a value or a pointer. Passed object can be made safe by pass by value. Other than this, there are no access modifiers like private or public in Go, the first letter of a variable or struct define the accessibility. Use a capital letter and it’s public, use a lowercase letter and it’s private (slick, isn’t it?). This is not a major improvement as such and encapsulation has different meaning in Go as granularity of privacy is the package, not struct. Nonetheless it’s an improvement.&lt;/p&gt;
+
+&lt;h1 id=&#34;polymorphism&#34;&gt;Polymorphism&lt;/h1&gt;
+
+&lt;h3 id=&#34;oo-s-way-4&#34;&gt;OO’s way&lt;/h3&gt;
+
+&lt;p&gt;Polymorphism is great just that you don’t need to extend from other classes to achieve polymorphism. It can be achieved through interfaces. Better have interface-based Polymorphism then inheritance-based polymorphism.&lt;/p&gt;
+
+&lt;h3 id=&#34;go-s-way-4&#34;&gt;GO’s way&lt;/h3&gt;
+
+&lt;p&gt;Seems like Inheritance is the real culprit. Interfaces are defined so well in Go that you don’t need inheritance at all to achieve polymorphism. Go does not require us to explicitly state that our types implement an interface. It’s actually better to work up on the requirement of the struct (class) and then label it. So if all necessary methods of an interface are defined in a struct, it implicitly implements that interface.&lt;/p&gt;
+
+&lt;p&gt;These are some of the many benefits Go has to offer. I have barely scratched the surface. Go is actually known for its intuitive concurrency model, standard library and package system. Some of the best recent projects are written in Go — Docker, Kubernetes, InfluxDb and Hugo (Jekyll killer!)&lt;/p&gt;
+
+&lt;p&gt;Go is neither about object-oriented programming nor functional programming. Honestly, it has little to recommend it as it does not have any buzzwords attached to it. Its simple, to the point and orthogonal.&lt;/p&gt;
+
+&lt;div class=&#34;message&#34;&gt;
+Go’s purpose is therefore not to do research into programming language design; it is to improve the working environment for its designers and their coworkers. Go is more about software engineering than programming language research. Or to rephrase, it is about language design in the service of software engineering. &lt;/br&gt; — &lt;em&gt;Rob Pike, Go’s creator.&lt;/em&gt;
+&lt;/div&gt;
+
+&lt;p&gt;That’s all folks..&lt;/p&gt;
+
+&lt;p&gt;Hope you had a good read. If you have any questions please post it in the comments.&lt;/p&gt;
+</description>
+        </item>
+      
     
       
         <item>
@@ -187,282 +381,7 @@ To Find the occurrences of a word &lt;strong&gt;W&lt;/strong&gt; within a main t
 &lt;p&gt;You just nailed Knuth-Morris-Pratt algorithm.&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;One last thing..&lt;/strong&gt;&lt;br /&gt;
-As I said this is my first blog in the series, if you have any suggestion on how I can improve then please do share in the comments and stay tuned for more. Have a great day :)&lt;/p&gt;
-</description>
-        </item>
-      
-    
-      
-        <item>
-          <title>Markdown Basics</title>
-          <link>https://girish3.github.io/2017/01/20/markdown-basics/</link>
-          <pubDate>Fri, 20 Jan 2017 00:00:00 UTC</pubDate>
-          <author>Girish Budhwani</author>
-          <guid>https://girish3.github.io/2017/01/20/markdown-basics/</guid>
-          <description>
-
-&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;The following line is bold&lt;br /&gt;
-&lt;strong&gt;Hi, I am Bold&lt;/strong&gt;&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;The following line is given &lt;strong&gt;emphasis&lt;/strong&gt;&lt;br /&gt;
-&lt;em&gt;I am cooool.&lt;/em&gt;&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;To write something on the &lt;strong&gt;new line&lt;/strong&gt;, give two spaces and hit enter&lt;br /&gt;
-Yay! we are on the next line&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Now comes the &lt;strong&gt;Headline&lt;/strong&gt;&lt;/p&gt;
-
-&lt;h1 id=&#34;what-s-up-people&#34;&gt;What&amp;rsquo;s up people?&lt;/h1&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Bit smaller &lt;strong&gt;Headline&lt;/strong&gt;&lt;/p&gt;
-
-&lt;h2 id=&#34;don-t-judge-me&#34;&gt;Don&amp;rsquo;t judge me&lt;/h2&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Even smaller &lt;strong&gt;Headline&lt;/strong&gt;&lt;/p&gt;
-
-&lt;h3 id=&#34;not-so-tiny-aye&#34;&gt;Not so tiny, aye&lt;/h3&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;You can also &lt;strong&gt;strikethrough&lt;/strong&gt; using two tildes&lt;br /&gt;
-&lt;del&gt;I can never be happy :(&lt;/del&gt;&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;How can markdown be complete without &lt;strong&gt;links&lt;/strong&gt;.&lt;br /&gt;
-&lt;a href=&#34;https://www.google.com&#34;&gt;guess the link&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Next comes the &lt;strong&gt;inline code&lt;/strong&gt;&lt;br /&gt;
-This line has &lt;code&gt;inline&lt;/code&gt; code &lt;code&gt;callback()&lt;/code&gt;&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;The &lt;strong&gt;block of code&lt;/strong&gt;&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;# this is python
-s = &amp;quot;Python syntax highlighting&amp;quot;
-print s
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;blockquote&gt;
-&lt;p&gt;The &lt;strong&gt;blockquote&lt;/strong&gt;&lt;br /&gt;
-with the new line&lt;/p&gt;
-&lt;/blockquote&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Raw html also works.&lt;br /&gt;
-&lt;strong&gt;I am strong&lt;/strong&gt;&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;h2 id=&#34;the-horizontal-ruler&#34;&gt;The &lt;strong&gt;horizontal ruler&lt;/strong&gt;&lt;/h2&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;And the &lt;strong&gt;image&lt;/strong&gt;
-&lt;img src=&#34;https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png&#34; alt=&#34;alt text&#34; title=&#34;Logo Title Text 1&#34; /&gt;&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Image with a width of 500&lt;/p&gt;&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;&lt;img src=&#34;http://localhost:1313/images/dexter.png&#34; width=&#34;500&#34;&gt;&lt;/p&gt;
-</description>
-        </item>
-      
-    
-      
-        <item>
-          <title>Introducing Lanyon</title>
-          <link>https://girish3.github.io/2014/01/02/introducing-lanyon/</link>
-          <pubDate>Thu, 02 Jan 2014 00:00:00 UTC</pubDate>
-          <author>Girish Budhwani</author>
-          <guid>https://girish3.github.io/2014/01/02/introducing-lanyon/</guid>
-          <description>
-
-&lt;p&gt;Lanyon is an unassuming &lt;a href=&#34;http://jekyllrb.com&#34;&gt;Jekyll&lt;/a&gt; theme that places content first by tucking away navigation in a hidden drawer. It&amp;rsquo;s based on &lt;a href=&#34;http://getpoole.com&#34;&gt;Poole&lt;/a&gt;, the Jekyll butler.&lt;/p&gt;
-
-&lt;h3 id=&#34;built-on-poole&#34;&gt;Built on Poole&lt;/h3&gt;
-
-&lt;p&gt;Poole is the Jekyll Butler, serving as an upstanding and effective foundation for Jekyll themes by &lt;a href=&#34;https://twitter.com/mdo&#34;&gt;@mdo&lt;/a&gt;. Poole, and every theme built on it (like Lanyon here) includes the following:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Complete Jekyll setup included (layouts, config, &lt;a href=&#34;https://girish3.github.io/404&#34;&gt;404&lt;/a&gt;, &lt;a href=&#34;https://girish3.github.io/index.xml&#34;&gt;RSS feed&lt;/a&gt;, posts, and &lt;a href=&#34;https://girish3.github.io/about&#34;&gt;example page&lt;/a&gt;)&lt;/li&gt;
-&lt;li&gt;Mobile friendly design and development&lt;/li&gt;
-&lt;li&gt;Easily scalable text and component sizing with &lt;code&gt;rem&lt;/code&gt; units in the CSS&lt;/li&gt;
-&lt;li&gt;Support for a wide gamut of HTML elements&lt;/li&gt;
-&lt;li&gt;Related posts (time-based, because Jekyll) below each post&lt;/li&gt;
-&lt;li&gt;Syntax highlighting, courtesy Pygments (the Python-based code snippet highlighter)&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&#34;lanyon-features&#34;&gt;Lanyon features&lt;/h3&gt;
-
-&lt;p&gt;In addition to the features of Poole, Lanyon adds the following:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Toggleable sliding sidebar (built with only CSS) via &lt;strong&gt;☰&lt;/strong&gt; link in top corner&lt;/li&gt;
-&lt;li&gt;Sidebar includes support for textual modules and a dynamically generated navigation with active link support&lt;/li&gt;
-&lt;li&gt;Two orientations for content and sidebar, default (left sidebar) and &lt;a href=&#34;https://github.com/poole/lanyon#reverse-layout&#34;&gt;reverse&lt;/a&gt; (right sidebar), available via &lt;code&gt;&amp;lt;body&amp;gt;&lt;/code&gt; classes&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/poole/lanyon#themes&#34;&gt;Eight optional color schemes&lt;/a&gt;, available via &lt;code&gt;&amp;lt;body&amp;gt;&lt;/code&gt; classes&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;a href=&#34;https://github.com/poole/lanyon#readme&#34;&gt;Head to the readme&lt;/a&gt; to learn more.&lt;/p&gt;
-
-&lt;h3 id=&#34;browser-support&#34;&gt;Browser support&lt;/h3&gt;
-
-&lt;p&gt;Lanyon is by preference a forward-thinking project. In addition to the latest versions of Chrome, Safari (mobile and desktop), and Firefox, it is only compatible with Internet Explorer 9 and above.&lt;/p&gt;
-
-&lt;h3 id=&#34;download&#34;&gt;Download&lt;/h3&gt;
-
-&lt;p&gt;Lanyon is developed on and hosted with GitHub. Head to the &lt;a href=&#34;https://github.com/poole/lanyon&#34;&gt;GitHub repository&lt;/a&gt; for downloads, bug reports, and features requests.&lt;/p&gt;
-
-&lt;p&gt;Thanks!&lt;/p&gt;
-</description>
-        </item>
-      
-    
-      
-        <item>
-          <title>Example content</title>
-          <link>https://girish3.github.io/2014/01/01/example-content/</link>
-          <pubDate>Wed, 01 Jan 2014 00:00:00 UTC</pubDate>
-          <author>Girish Budhwani</author>
-          <guid>https://girish3.github.io/2014/01/01/example-content/</guid>
-          <description>
-
-&lt;div class=&#34;message&#34;&gt;
-  Howdy! This is an example blog post that shows several types of HTML content supported in this theme.
-&lt;/div&gt;
-
-&lt;p&gt;Cum sociis natoque penatibus et magnis &lt;a href=&#34;#&#34;&gt;dis parturient montes&lt;/a&gt;, nascetur ridiculus mus. &lt;em&gt;Aenean eu leo quam.&lt;/em&gt; Pellentesque ornare sem lacinia quam venenatis vestibulum. Sed posuere consectetur est at lobortis. Cras mattis consectetur purus sit amet fermentum.&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;Curabitur blandit tempus porttitor. Nullam quis risus eget urna mollis ornare vel eu leo. Nullam id dolor id nibh ultricies vehicula ut id elit.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;Etiam porta &lt;strong&gt;sem malesuada magna&lt;/strong&gt; mollis euismod. Cras mattis consectetur purus sit amet fermentum. Aenean lacinia bibendum nulla sed consectetur.&lt;/p&gt;
-
-&lt;h2 id=&#34;inline-html-elements&#34;&gt;Inline HTML elements&lt;/h2&gt;
-
-&lt;p&gt;HTML defines a long list of available inline tags, a complete list of which can be found on the &lt;a href=&#34;https://developer.mozilla.org/en-US/docs/Web/HTML/Element&#34;&gt;Mozilla Developer Network&lt;/a&gt;.&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;To bold text&lt;/strong&gt;, use &lt;code&gt;&amp;lt;strong&amp;gt;&lt;/code&gt;.&lt;/li&gt;
-&lt;li&gt;&lt;em&gt;To italicize text&lt;/em&gt;, use &lt;code&gt;&amp;lt;em&amp;gt;&lt;/code&gt;.&lt;/li&gt;
-&lt;li&gt;Abbreviations, like &lt;abbr title=&#34;HyperText Markup Langage&#34;&gt;HTML&lt;/abbr&gt; should use &lt;code&gt;&amp;lt;abbr&amp;gt;&lt;/code&gt;, with an optional &lt;code&gt;title&lt;/code&gt; attribute for the full phrase.&lt;/li&gt;
-&lt;li&gt;Citations, like &lt;cite&gt;&amp;mdash; Mark otto&lt;/cite&gt;, should use &lt;code&gt;&amp;lt;cite&amp;gt;&lt;/code&gt;.&lt;/li&gt;
-&lt;li&gt;&lt;del&gt;Deleted&lt;/del&gt; text should use &lt;code&gt;&amp;lt;del&amp;gt;&lt;/code&gt; and &lt;ins&gt;inserted&lt;/ins&gt; text should use &lt;code&gt;&amp;lt;ins&amp;gt;&lt;/code&gt;.&lt;/li&gt;
-&lt;li&gt;Superscript &lt;sup&gt;text&lt;/sup&gt; uses &lt;code&gt;&amp;lt;sup&amp;gt;&lt;/code&gt; and subscript &lt;sub&gt;text&lt;/sub&gt; uses &lt;code&gt;&amp;lt;sub&amp;gt;&lt;/code&gt;.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Most of these elements are styled by browsers with few modifications on our part.&lt;/p&gt;
-
-&lt;h2 id=&#34;heading&#34;&gt;Heading&lt;/h2&gt;
-
-&lt;p&gt;Vivamus sagittis lacus vel augue rutrum faucibus dolor auctor. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.&lt;/p&gt;
-
-&lt;h3 id=&#34;code&#34;&gt;Code&lt;/h3&gt;
-
-&lt;p&gt;Cum sociis natoque penatibus et magnis dis &lt;code&gt;code element&lt;/code&gt; montes, nascetur ridiculus mus.&lt;/p&gt;
-
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;// Example can be run directly in your JavaScript console&lt;/span&gt;
-
-&lt;span class=&#34;c1&#34;&gt;// Create a function that takes two arguments and returns the sum of those arguments&lt;/span&gt;
-&lt;span class=&#34;kd&#34;&gt;var&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;adder&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;new&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;Function&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;quot;a&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;quot;b&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;quot;return a + b&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
-
-&lt;span class=&#34;c1&#34;&gt;// Call the function&lt;/span&gt;
-&lt;span class=&#34;nx&#34;&gt;adder&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;6&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
-&lt;span class=&#34;c1&#34;&gt;// &amp;gt; 8&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;Aenean lacinia bibendum nulla sed consectetur. Etiam porta sem malesuada magna mollis euismod. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa.&lt;/p&gt;
-
-&lt;h3 id=&#34;lists&#34;&gt;Lists&lt;/h3&gt;
-
-&lt;p&gt;Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Aenean lacinia bibendum nulla sed consectetur. Etiam porta sem malesuada magna mollis euismod. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Praesent commodo cursus magna, vel scelerisque nisl consectetur et.&lt;/li&gt;
-&lt;li&gt;Donec id elit non mi porta gravida at eget metus.&lt;/li&gt;
-&lt;li&gt;Nulla vitae elit libero, a pharetra augue.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Donec ullamcorper nulla non metus auctor fringilla. Nulla vitae elit libero, a pharetra augue.&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;Vestibulum id ligula porta felis euismod semper.&lt;/li&gt;
-&lt;li&gt;Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.&lt;/li&gt;
-&lt;li&gt;Maecenas sed diam eget risus varius blandit sit amet non magna.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;Cras mattis consectetur purus sit amet fermentum. Sed posuere consectetur est at lobortis.&lt;/p&gt;
-
-&lt;dl&gt;
-  &lt;dt&gt;HyperText Markup Language (HTML)&lt;/dt&gt;
-  &lt;dd&gt;The language used to describe and define the content of a Web page&lt;/dd&gt;
-
-  &lt;dt&gt;Cascading Style Sheets (CSS)&lt;/dt&gt;
-  &lt;dd&gt;Used to describe the appearance of Web content&lt;/dd&gt;
-
-  &lt;dt&gt;JavaScript (JS)&lt;/dt&gt;
-  &lt;dd&gt;The programming language used to build advanced Web sites and applications&lt;/dd&gt;
-&lt;/dl&gt;
-
-&lt;p&gt;Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Nullam quis risus eget urna mollis ornare vel eu leo.&lt;/p&gt;
-
-&lt;h3 id=&#34;tables&#34;&gt;Tables&lt;/h3&gt;
-
-&lt;p&gt;Aenean lacinia bibendum nulla sed consectetur. Lorem ipsum dolor sit amet, consectetur adipiscing elit.&lt;/p&gt;
-
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th&gt;Name&lt;/th&gt;
-      &lt;th&gt;Upvotes&lt;/th&gt;
-      &lt;th&gt;Downvotes&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tfoot&gt;
-    &lt;tr&gt;
-      &lt;td&gt;Totals&lt;/td&gt;
-      &lt;td&gt;21&lt;/td&gt;
-      &lt;td&gt;23&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tfoot&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;Alice&lt;/td&gt;
-      &lt;td&gt;10&lt;/td&gt;
-      &lt;td&gt;11&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;Bob&lt;/td&gt;
-      &lt;td&gt;4&lt;/td&gt;
-      &lt;td&gt;3&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;Charlie&lt;/td&gt;
-      &lt;td&gt;7&lt;/td&gt;
-      &lt;td&gt;9&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;p&gt;Nullam id dolor id nibh ultricies vehicula ut id elit. Sed posuere consectetur est at lobortis. Nullam quis risus eget urna mollis ornare vel eu leo.&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;Want to see something else added? &lt;a href=&#34;https://github.com/poole/poole/issues/new&#34;&gt;Open an issue.&lt;/a&gt;&lt;/p&gt;
-</description>
-        </item>
-      
-    
-      
-        <item>
-          <title>What&#39;s Jekyll?</title>
-          <link>https://girish3.github.io/2013/12/31/whats-jekyll/</link>
-          <pubDate>Tue, 31 Dec 2013 00:00:00 UTC</pubDate>
-          <author>Girish Budhwani</author>
-          <guid>https://girish3.github.io/2013/12/31/whats-jekyll/</guid>
-          <description>&lt;p&gt;&lt;a href=&#34;http://jekyllrb.com&#34;&gt;Jekyll&lt;/a&gt; is a static site generator, an open-source tool for creating simple yet powerful websites of all shapes and sizes. From &lt;a href=&#34;https://github.com/mojombo/jekyll/blob/master/README.markdown&#34;&gt;the project&amp;rsquo;s readme&lt;/a&gt;:&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;Jekyll is a simple, blog aware, static site generator. It takes a template directory [&amp;hellip;] and spits out a complete, static website suitable for serving with Apache or your favorite web server. This is also the engine behind GitHub Pages, which you can use to host your project’s page or blog right here from GitHub.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;It&amp;rsquo;s an immensely useful tool and one we encourage you to use here with Hyde.&lt;/p&gt;
-
-&lt;p&gt;Find out more by &lt;a href=&#34;https://github.com/mojombo/jekyll&#34;&gt;visiting the project on GitHub&lt;/a&gt;.&lt;/p&gt;
+As I said this is my first blog in the series, if you have any suggestion on how I can improve then please do share in the comments and stay tuned for more.&lt;/p&gt;
 </description>
         </item>
       

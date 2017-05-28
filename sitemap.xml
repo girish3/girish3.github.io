@@ -6,28 +6,13 @@
   </url>
   
   <url>
+    <loc>https://girish3.github.io/2017/05/28/the-problem-with-oop-and-how-golang-solves-it./</loc>
+    <lastmod>2017-05-28T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://girish3.github.io/2017/01/29/string-matching-kmp-algorithm/</loc>
     <lastmod>2017-01-29T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://girish3.github.io/2017/01/20/markdown-basics/</loc>
-    <lastmod>2017-01-20T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://girish3.github.io/2014/01/02/introducing-lanyon/</loc>
-    <lastmod>2014-01-02T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://girish3.github.io/2014/01/01/example-content/</loc>
-    <lastmod>2014-01-01T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://girish3.github.io/2013/12/31/whats-jekyll/</loc>
-    <lastmod>2013-12-31T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -42,8 +27,8 @@
   </url>
   
   <url>
-    <loc>https://girish3.github.io/tags/golang/</loc>
-    <lastmod>2014-01-01T00:00:00+00:00</lastmod>
+    <loc>https://girish3.github.io/tags/go/</loc>
+    <lastmod>2017-05-28T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -55,13 +40,13 @@
   
   <url>
     <loc>https://girish3.github.io/post/</loc>
-    <lastmod>2017-01-29T00:00:00+00:00</lastmod>
+    <lastmod>2017-05-28T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://girish3.github.io/</loc>
-    <lastmod>2017-01-29T00:00:00+00:00</lastmod>
+    <lastmod>2017-05-28T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
