@@ -98,9 +98,9 @@
   
   
 
-<p><img src="/images/golang.jpg" width="720"></p>
+<p><img src="/images/mac1.jpg" width="720"></p>
 
-<p>We have been using OOP paradigm for few decades now and the so called three pillars of OOP &ndash; Inheritance, polymorphism and encapsulation, they seem to be essential and useful but they have an inherent problem. The problem so grave that if not handled well it will stick to your codebase like a cancer. It will make your code more resistance to change and anti-patterns will creep in. In this article, we will peek into the world of Go programming language and how it handles those issues in a very elegant fashion. I have been using Go for few months now and I consider myself novice so feel free to bash. Without further ado, let’s target each of the cracked pillars of OOP.</p>
+<p>We have been using OOP paradigm for few decades now and the so called three pillars of OOP &ndash; Inheritance, polymorphism and encapsulation, they seem to be essential and useful but they have an inherent problem. The problem so grave that if not handled well it will stick to your codebase like a cancer. It will make your code more resistance to change and anti-patterns will creep in. In this article, we will peek into the world of <a href="https://en.wikipedia.org/wiki/Go_(programming_language)">Go programming language</a> and how it handles those issues in a very elegant fashion. I have been using Go for few months now and I consider myself novice so feel free to bash. Without further ado, let’s target each of the cracked pillars of OOP.</p>
 
 <h1 id="inheritance">Inheritance</h1>
 
@@ -133,10 +133,13 @@ Guess what? Change was actually done in the class you inherited from !!! Yes, it
     <span class="n">inc1</span><span class="o">();</span>
   <span class="o">}</span>
 <span class="o">}</span>
+
+<span class="n">Child</span> <span class="n">child</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Child</span><span class="o">();</span>
+<span class="n">child</span><span class="o">.</span><span class="na">inc2</span><span class="o">();</span>
 </code></pre></div>
 
 
-<p>The above example is straight forward, <code>inc2()</code> method is overridden, it will call <code>inc1()</code> of base class and thus incrementing <code>i</code> by 1. Let’s make a simple change in our Base class.</p>
+<p>The above example is straight forward,<code>inc2()</code>method is overridden, it will call<code>inc1()</code>of base class and thus incrementing<code>i</code>by 1. Let’s make a simple change in our Base class.</p>
 
 <div class="highlight"><pre><code class="language-java" data-lang="java"><span></span><span class="c1">// the example is in Java</span>
 <span class="kd">class</span> <span class="nc">Base</span> <span class="o">{</span>
@@ -158,10 +161,13 @@ Guess what? Change was actually done in the class you inherited from !!! Yes, it
     <span class="n">inc1</span><span class="o">();</span>
   <span class="o">}</span>
 <span class="o">}</span>
+
+<span class="n">Child</span> <span class="n">child</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Child</span><span class="o">();</span>
+<span class="n">child</span><span class="o">.</span><span class="na">inc2</span><span class="o">();</span>
 </code></pre></div>
 
 
-<p><code>inc1()</code> method of Base class will now actually call an overridden <code>inc2()</code> method and your program will be stuck in an infinite loop!! Inheritance is flawed.</p>
+<p><code>inc1()</code> method of Base class will now actually call an overridden<code>inc2()</code>method and your program will be stuck in an infinite loop!! Inheritance is not full-proof, it has a flaw.</p>
 
 <p>This is such a simple and effective demonstration for a case where you really have to dig up the source of the parent class in order to find out the cause for the unexpected behaviour. One way to solve the issue is to use Composition, but OOP languages do not make it easy to compose objects. They are made to make inheritance easy.</p>
 
@@ -202,25 +208,25 @@ Guess what? Change was actually done in the class you inherited from !!! Yes, it
 </code></pre></div>
 
 
-<p>Thanks to method promotion, <code>GetName()</code> method of type Human can be called directly on the Student type. In Java, we would have had to create a wrapper to call on methods of Human (extra work).</p>
+<p>Thanks to method promotion,<code>GetName()</code>method of type Human can be called directly on the Student type. In Java, we would have had to create a wrapper to call on methods of Human (extra work).</p>
 
 <div class="message">
     When we embed a type, the methods of that type become methods of the outer type, but when they are invoked, the receiver of the method is the inner type, not the outer one. </br> 
     <i>— Effective Go book</i>
 </div>
 
-<p>Had we implemented the fragile base class example in Go, then <code>inc1()</code> method of base class would have called its own <code>inc2()</code> method and thus it wouldn’t have caused the issue in the first place.</p>
+<p>Had we implemented the fragile base class example in Go, then<code>inc1()</code>method of base class would have called its own<code>inc2()</code>method and thus it wouldn’t have caused the issue in the first place.</p>
 
-<p>Go’s struct embedding is amazing. It disguises composition as inheritance and it is much more powerful than a class-based inheritance model, as it allows a much greater degree of flexibility.</p>
+<p>Go’s <a href="https://www.golang-book.com/books/intro/9">struct embedding</a> is amazing. It disguises composition as inheritance and it is much more powerful than a class-based inheritance model, as it allows a much greater degree of flexibility.</p>
 
 <h2 id="testing">Testing</h2>
 
 <h3 id="oo-s-way-1">OO’s way</h3>
 
-<p>Better testing can be done if the classes are composed rather than inherited. If one class is composed of another class, mock objects can be easily created to do the testing of target class. Inheritance doesn&rsquo;t provide this luxury. In order to test derived class, you must need its super class. If your codebase has multi-tiered inheritance structure then you will need hell a lot of classes to do a testing of a mere sub class.</p>
+<p>Better testing can be done if the classes are composed rather than inherited. If one class is composed of another class, <a href="https://stackoverflow.com/questions/3622455/what-is-the-purpose-of-mock-objects">mock objects</a> can be easily created to do the testing of target class. Inheritance doesn&rsquo;t provide this luxury. In order to test derived class, you must need its super class. If your codebase has multi-tiered inheritance structure then you will need hell a lot of classes to do a testing of a mere sub class.</p>
 
 <div class="message">
-    The problem with object-oriented languages is they’ve got all this implicit environment that they carry around with them. You wanted a banana but what you got was a gorilla holding the banana and the entire jungle. </br> <i>— Joe Armstrong</i>
+    <i>The problem with object-oriented languages is they’ve got all this implicit environment that they carry around with them. You wanted a banana but what you got was a gorilla holding the banana and the entire jungle. </i></br> — Joe Armstrong
 </div>
 
 <h3 id="go-s-way-1">GO’s way</h3>
@@ -233,11 +239,11 @@ Guess what? Change was actually done in the class you inherited from !!! Yes, it
 
 <p><img src="/images/multiple_inheritance.png" width="400" style="margin: auto"></p>
 
-<p>The above example makes logical sense and is a use case of having multiple inheritance. Scanner and printer inherit from PD (PoweredDevice), and Copier inherits from both Scanner and Printer. There is a method in PD that Scanner and Printer have overridden. Now the issue is which method will Copier inherit? that of Scanner or Printer? Most OOP languages do not support multiple inheritance, but the ones which do, like C++, has a complex approach and requires explicitly stating which parent class the method to be used.</p>
+<p>The above example makes logical sense and is a use case of having multiple inheritance. Scanner and printer inherit from PD (PoweredDevice), and Copier inherits from both Scanner and Printer. There is a method<code>start()</code>in PD that Scanner and Printer have overridden. Now the issue is which method will Copier inherit? that of Scanner or Printer? Most OOP languages do not support multiple inheritance, but the ones which do, like C++, has a complex approach and requires explicitly stating which parent class the method to be used.</p>
 
 <h3 id="go-s-way-2">GO’s way</h3>
 
-<p>Scanner and Printer type can be embedded in Copier and a start() method can be added in Copier to decide which method to be called, so again, composition is the solution and it&rsquo;s not something unique to Go, just that it makes composition easier.</p>
+<p>Scanner and Printer type can be embedded in Copier and<code>start()</code>method can be added in Copier to decide which method to be called, so again, composition is the solution and it&rsquo;s not something unique to Go, just that it makes composition easier.</p>
 
 <h1 id="encapsulation">Encapsulation</h1>
 
@@ -245,13 +251,13 @@ Guess what? Change was actually done in the class you inherited from !!! Yes, it
 
 <h3 id="oo-s-way-3">OO’s way</h3>
 
-<p>We generally pass objects by reference, if we pass it to a constructor, then set it to a private variable of a class then that object is in fact not safe. Keeping that object’s reference outside class is dangerous. Since Java and many other languages do not differentiate between a reference and an actual data, a class can never know whether it’s private members can be changed from outside. Dirty work around could be to always copy the passed object in the constructor.</p>
+<p>We generally pass objects by reference, if we pass it to a constructor, then set it to a private variable of a class then that <strong>object is in fact not safe</strong>. Keeping that object’s reference outside class is dangerous. Since Java and many other languages do not differentiate between a reference and an actual data, a class can never know whether it’s private members can be changed from outside. Dirty work around could be to always copy the passed object in the constructor.</p>
 
-<p>There is another issue that we have already seen in fragile base class problem and is summarised really well in the design patterns bible:</p>
+<p>There is another issue that we have already seen in fragile base class problem and is summarised really well in the design pattern bible:</p>
 
 <div class="message">
-Because inheritance exposes a subclass to details of its parent's implementation, it's often said that "inheritance breaks encapsulation" </br>
-<i>— Gang of Four, Design Patterns</i>
+<i>Because inheritance exposes a subclass to details of its parent's implementation, it's often said that "inheritance breaks encapsulation" </br>
+— Gang of Four, Design Patterns</i>
 </div>
 
 <h3 id="go-s-way-3">GO’s way</h3>
@@ -266,19 +272,29 @@ Because inheritance exposes a subclass to details of its parent's implementation
 
 <h3 id="go-s-way-4">GO’s way</h3>
 
-<p>Seems like Inheritance is the real culprit. Interfaces are defined so well in Go that you don’t need inheritance at all to achieve polymorphism. Go does not require us to explicitly state that our types implement an interface. It’s actually better to work up on the requirement of the struct (class) and then label it. So if all necessary methods of an interface are defined in a struct, it implicitly implements that interface.</p>
+<p>Seems like Inheritance is the real culprit. Interfaces are defined so well in Go that you don’t need inheritance at all to achieve polymorphism. Go does not require us to explicitly state that our types implement an <a href="https://gobyexample.com/interfaces">interface</a>. It’s actually better to work up on the requirements of the struct (class) and then label it. So if all necessary methods of an interface are defined in a struct, it implicitly implements that interface.</p>
 
-<p>These are some of the many benefits Go has to offer. I have barely scratched the surface. Go is actually known for its intuitive concurrency model, standard library and package system. Some of the best recent projects are written in Go — Docker, Kubernetes, InfluxDb and Hugo (Jekyll killer!)</p>
+<p>These are some of the many benefits Go has to offer. I have barely scratched the surface. Go is actually known for its intuitive concurrency model, standard library and package system. Some of the best recent projects are written in Go — <a href="https://www.docker.com/">Docker</a>, <a href="https://github.com/kubernetes/kubernetes">Kubernetes</a>, InfluxDb and <a href="https://github.com/spf13/hugo">Hugo</a> (Jekyll killer!)</p>
 
 <p>Go is neither about object-oriented programming nor functional programming. Honestly, it has little to recommend it as it does not have any buzzwords attached to it. Its simple, to the point and orthogonal.</p>
 
 <div class="message">
-Go’s purpose is therefore not to do research into programming language design; it is to improve the working environment for its designers and their coworkers. Go is more about software engineering than programming language research. Or to rephrase, it is about language design in the service of software engineering. </br> — <em>Rob Pike, Go’s creator.</em>
+<i>Go’s purpose is therefore not to do research into programming language design; it is to improve the working environment for its designers and their coworkers. Go is more about software engineering than programming language research. Or to rephrase, it is about language design in the service of software engineering. </br> — Rob Pike, Go’s creator.</i>
 </div>
 
 <p>That’s all folks..</p>
 
 <p>Hope you had a good read. If you have any questions please post it in the comments.</p>
+
+<h3 id="references">References:</h3>
+
+<ul>
+<li><a href="https://www.goinggo.net/2014/05/methods-interfaces-and-embedded-types.html">Methods, Interfaces and Embedded Types in Go</a></li>
+<li><a href="http://javarevisited.blogspot.in/2013/06/why-favor-composition-over-inheritance-java-oops-design.html">5 Reasons to Use Composition over Inheritance in Java</a></li>
+<li><a href="https://medium.com/@cscalfani/goodbye-object-oriented-programming-a59cda4c0e53">Goodbye, Object Oriented Programming</a></li>
+<li><a href="http://igstan.ro/posts/2011-09-09-how-inheritance-violates-encapsulation.html">How Inheritance Violates Encapsulation</a></li>
+<li><a href="https://www.goinggo.net/2013/07/object-oriented-programming-in-go.html">Object Oriented Programming in Go</a></li>
+</ul>
 
 </div>
 
