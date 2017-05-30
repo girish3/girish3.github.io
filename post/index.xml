@@ -171,7 +171,33 @@ Guess what? Change was actually done in the class you inherited from !!! Yes, it
 
 &lt;h3 id=&#34;oo-s-way-3&#34;&gt;OO’s way&lt;/h3&gt;
 
-&lt;p&gt;We generally pass objects by reference, if we pass it to a constructor, then set it to a private variable of a class then that &lt;strong&gt;object is in fact not safe&lt;/strong&gt;. Keeping that object’s reference outside class is dangerous. Since Java and many other languages do not differentiate between a reference and an actual data, a class can never know whether it’s private members can be changed from outside. Dirty work around could be to always copy the passed object in the constructor.&lt;/p&gt;
+&lt;p&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&#34;kd&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;kd&#34;&gt;class&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;Human&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;
+  &lt;span class=&#34;kd&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;String&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;name&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;;&lt;/span&gt;
+  
+  &lt;span class=&#34;kd&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;Human&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;String&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;name&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;
+    &lt;span class=&#34;k&#34;&gt;this&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;name&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;name&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;;&lt;/span&gt;
+  &lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
+
+&lt;span class=&#34;kd&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;kd&#34;&gt;class&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;Student&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;
+  &lt;span class=&#34;kd&#34;&gt;private&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Human&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;human&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;;&lt;/span&gt;
+  &lt;span class=&#34;kd&#34;&gt;private&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;id&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;;&lt;/span&gt;
+  
+  &lt;span class=&#34;kd&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;Student&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Human&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;human&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;id&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;
+    &lt;span class=&#34;k&#34;&gt;this&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;human&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;human&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;;&lt;/span&gt;
+    &lt;span class=&#34;k&#34;&gt;this&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;id&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;id&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;;&lt;/span&gt;
+  &lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
+
+&lt;span class=&#34;kd&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;kd&#34;&gt;static&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;void&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;main&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;String&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;[]&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;args&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;
+  &lt;span class=&#34;n&#34;&gt;Human&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;h&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;new&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Human&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;quot;foo&amp;quot;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;);&lt;/span&gt;
+  &lt;span class=&#34;n&#34;&gt;Student&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;s&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;new&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Student&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;h&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;);&lt;/span&gt;
+  &lt;span class=&#34;c1&#34;&gt;// changing the Human object which is supposed to be private.&lt;/span&gt;
+  &lt;span class=&#34;n&#34;&gt;h&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;name&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;quot;bar&amp;quot;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;;&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+We have two classes&lt;code&gt;Human&lt;/code&gt;and&lt;code&gt;Student&lt;/code&gt;containing&lt;code&gt;Human&lt;/code&gt;. In the above code, we pass Human object by reference to Student constructor, then set it to a private variable. We see that &lt;strong&gt;object is in fact not safe&lt;/strong&gt;. It can be tweaked from outside. Keeping that object’s reference outside class is dangerous. Since Java and many other languages do not differentiate between a reference and an actual data, a class can never know whether it’s private members can be changed from outside. Dirty work around could be to always copy the passed object in the constructor.&lt;/p&gt;
 
 &lt;p&gt;There is another issue that we have already seen in fragile base class problem and is summarised really well in the design pattern bible:&lt;/p&gt;
 
@@ -182,7 +208,16 @@ Guess what? Change was actually done in the class you inherited from !!! Yes, it
 
 &lt;h3 id=&#34;go-s-way-3&#34;&gt;GO’s way&lt;/h3&gt;
 
-&lt;p&gt;Pointers to the rescue. Go has pointers (like C) but there is no pointer arithmetic, in case you are scared. Objects can be passed by pointer or by value, since both are of different types, a class (struct) can define itself to either expect a value or a pointer. Passed object can be made safe by pass by value. Other than this, there are no access modifiers like private or public in Go, the first letter of a variable or struct define the accessibility. Use a capital letter and it’s public, use a lowercase letter and it’s private (slick, isn’t it?). This is not a major improvement as such and encapsulation has different meaning in Go as granularity of privacy is the package, not struct. Nonetheless it’s an improvement.&lt;/p&gt;
+&lt;p&gt;Pointers to the rescue. Go has pointers (like C) but there is no pointer arithmetic, in case you are scared. Objects can be passed by pointer or by value, since both are of different types, a class (struct) can define itself to either expect a value or a pointer. &lt;strong&gt;Passed object can be made safe by pass by value&lt;/strong&gt;. Other than this, there are no access modifiers like private or public in Go, the first letter of a variable or struct define the accessibility. Use a capital letter and it’s public, use a lowercase letter and it’s private (slick, isn’t it?). This is not a major improvement as such and encapsulation has different meaning in Go as granularity of privacy is the package, not struct. Nonetheless it’s an improvement.
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-Go&#34; data-lang=&#34;Go&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;// Taking the same Go example as above&lt;/span&gt;
+
+&lt;span class=&#34;c1&#34;&gt;// Human and Student structs ....&lt;/span&gt;
+
+&lt;span class=&#34;nx&#34;&gt;human&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;:=&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;Human&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;quot;John&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;span class=&#34;c1&#34;&gt;// human will be passed by value, new copy will be created.&lt;/span&gt;
+&lt;span class=&#34;nx&#34;&gt;student&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;:=&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;Student&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;human&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/p&gt;
 
 &lt;h1 id=&#34;polymorphism&#34;&gt;Polymorphism&lt;/h1&gt;
 

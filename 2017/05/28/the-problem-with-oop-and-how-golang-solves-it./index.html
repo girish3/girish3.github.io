@@ -255,7 +255,33 @@ Guess what? Change was actually done in the class you inherited from !!! Yes, it
 
 <h3 id="oo-s-way-3">OO’s way</h3>
 
-<p>We generally pass objects by reference, if we pass it to a constructor, then set it to a private variable of a class then that <strong>object is in fact not safe</strong>. Keeping that object’s reference outside class is dangerous. Since Java and many other languages do not differentiate between a reference and an actual data, a class can never know whether it’s private members can be changed from outside. Dirty work around could be to always copy the passed object in the constructor.</p>
+<p><div class="highlight"><pre><code class="language-java" data-lang="java"><span></span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Human</span> <span class="o">{</span>
+  <span class="kd">public</span> <span class="n">String</span> <span class="n">name</span><span class="o">;</span>
+  
+  <span class="kd">public</span> <span class="nf">Human</span><span class="o">(</span><span class="n">String</span> <span class="n">name</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">this</span><span class="o">.</span><span class="na">name</span> <span class="o">=</span> <span class="n">name</span><span class="o">;</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Student</span> <span class="o">{</span>
+  <span class="kd">private</span> <span class="n">Human</span> <span class="n">human</span><span class="o">;</span>
+  <span class="kd">private</span> <span class="kt">int</span> <span class="n">id</span><span class="o">;</span>
+  
+  <span class="kd">public</span> <span class="nf">Student</span><span class="o">(</span><span class="n">Human</span> <span class="n">human</span><span class="o">,</span> <span class="kt">int</span> <span class="n">id</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">this</span><span class="o">.</span><span class="na">human</span> <span class="o">=</span> <span class="n">human</span><span class="o">;</span>
+    <span class="k">this</span><span class="o">.</span><span class="na">id</span> <span class="o">=</span> <span class="n">id</span><span class="o">;</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+  <span class="n">Human</span> <span class="n">h</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Human</span><span class="o">(</span><span class="s">&quot;foo&quot;</span><span class="o">);</span>
+  <span class="n">Student</span> <span class="n">s</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Student</span><span class="o">(</span><span class="n">h</span><span class="o">,</span> <span class="mi">1</span><span class="o">);</span>
+  <span class="c1">// changing the Human object which is supposed to be private.</span>
+  <span class="n">h</span><span class="o">.</span><span class="na">name</span> <span class="o">=</span> <span class="s">&quot;bar&quot;</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></div>
+
+We have two classes<code>Human</code>and<code>Student</code>containing<code>Human</code>. In the above code, we pass Human object by reference to Student constructor, then set it to a private variable. We see that <strong>object is in fact not safe</strong>. It can be tweaked from outside. Keeping that object’s reference outside class is dangerous. Since Java and many other languages do not differentiate between a reference and an actual data, a class can never know whether it’s private members can be changed from outside. Dirty work around could be to always copy the passed object in the constructor.</p>
 
 <p>There is another issue that we have already seen in fragile base class problem and is summarised really well in the design pattern bible:</p>
 
@@ -266,7 +292,16 @@ Guess what? Change was actually done in the class you inherited from !!! Yes, it
 
 <h3 id="go-s-way-3">GO’s way</h3>
 
-<p>Pointers to the rescue. Go has pointers (like C) but there is no pointer arithmetic, in case you are scared. Objects can be passed by pointer or by value, since both are of different types, a class (struct) can define itself to either expect a value or a pointer. Passed object can be made safe by pass by value. Other than this, there are no access modifiers like private or public in Go, the first letter of a variable or struct define the accessibility. Use a capital letter and it’s public, use a lowercase letter and it’s private (slick, isn’t it?). This is not a major improvement as such and encapsulation has different meaning in Go as granularity of privacy is the package, not struct. Nonetheless it’s an improvement.</p>
+<p>Pointers to the rescue. Go has pointers (like C) but there is no pointer arithmetic, in case you are scared. Objects can be passed by pointer or by value, since both are of different types, a class (struct) can define itself to either expect a value or a pointer. <strong>Passed object can be made safe by pass by value</strong>. Other than this, there are no access modifiers like private or public in Go, the first letter of a variable or struct define the accessibility. Use a capital letter and it’s public, use a lowercase letter and it’s private (slick, isn’t it?). This is not a major improvement as such and encapsulation has different meaning in Go as granularity of privacy is the package, not struct. Nonetheless it’s an improvement.
+<div class="highlight"><pre><code class="language-Go" data-lang="Go"><span></span><span class="c1">// Taking the same Go example as above</span>
+
+<span class="c1">// Human and Student structs ....</span>
+
+<span class="nx">human</span> <span class="o">:=</span> <span class="nx">Human</span><span class="p">{</span><span class="s">&quot;John&quot;</span><span class="p">}</span>
+<span class="c1">// human will be passed by value, new copy will be created.</span>
+<span class="nx">student</span> <span class="o">:=</span> <span class="nx">Student</span><span class="p">{</span><span class="nx">human</span><span class="p">,</span> <span class="mi">1</span><span class="p">}</span>
+</code></pre></div>
+</p>
 
 <h1 id="polymorphism">Polymorphism</h1>
 
