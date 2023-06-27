@@ -1,0 +1,131 @@
+html, body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    background: #0D0D0D;
+    display: flex;
+    overflow: hidden;
+  }
+
+/* body {
+    background: #0D0D0D;
+    display: flex;
+} */
+.left-section {
+    position: relative;
+    display: flex;
+    width: 50%;
+    box-sizing: border-box;
+    height: 100%;
+    padding: 120px;
+    flex-direction: column;
+    justify-content: space-between;
+    /* align-items: center; */
+    flex-shrink: 0;
+}
+
+.superhr-logo{
+    left: 120px;
+    position: absolute;
+}
+
+/* div.launching-soon {
+    display: grid;
+    top: 105px;
+    position: relative;
+}
+
+div.launching-soon span{
+    color: #FFF;
+    font-size: 64px;
+    font-family: Proxima Nova;
+    font-weight: 800;
+    line-height: 76px;
+}
+
+div.launching-soon span:nth-child(2) {
+    background: linear-gradient(to right, rgba(237, 109, 49, 1), rgba(235, 68, 50, 1));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 64px;
+    font-family: Proxima Nova;
+    font-weight: 800;
+    line-height: 76px;
+    width: 300px;
+} */
+
+img.we-are-launching-soon {
+    width: 308px;
+    top: 105px;
+    position: relative;
+}
+
+div.join-waitlist {
+    color: rgba(255, 255, 255, 0.64);
+    font-size: 20px;
+    font-family: Proxima Nova;
+    font-weight: 500;
+    line-height: 32px;
+    position: absolute;
+    top: 450px;
+}
+
+div.footer-line {
+    width: 380px;
+    height: 1px;    
+    background: rgb(255, 255, 255, 0.04);
+    left: calc(50% - 380px/2);
+    bottom: -130px;
+    position: relative;
+}
+
+div.social-media {
+    display: flex;
+    gap: 24px;
+    /* bottom: 375px; */
+    justify-content: center;
+    position: relative;
+    top: 0px;
+}
+
+div.right-section {
+    width: 100%;
+}
+
+div.right-section img {
+    position: absolute;
+    bottom: 0px;
+    left: 50%;
+}
+
+img.launching-soon2 {
+    /* color: rgba(173, 159, 159, 0.12); */
+    /* text-align: center;
+    font-size: 123px;
+    font-family: Proxima Nova;
+    font-weight: 700; */
+    /* line-height: 47px; */
+    position: absolute;
+    /* top: 92%; */
+    bottom: 0px;
+}
+
+img.launching-soon1 {
+    position: absolute;
+    right: 0px;
+}
+
+/* div.launching-soon-text {
+    color: rgba(173, 159, 159, 0.12);
+    text-align: center;
+    font-size: 123px;
+    font-family: Proxima Nova;
+    font-weight: 700;
+    line-height: 47px;
+    z-index: 2;
+    position: absolute;
+    top: 92%;
+} */
