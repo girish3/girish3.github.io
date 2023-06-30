@@ -5,7 +5,7 @@ html, body {
     padding: 0;
     background: #0D0D0D;
     display: flex;
-    overflow: hidden;
+    /* overflow: hidden; */
   }
 
 /* body {
@@ -129,3 +129,34 @@ img.launching-soon1 {
     position: absolute;
     top: 92%;
 } */
+
+button.join-button {
+    /* width: 70px;
+    height: 40px; */
+    display: flex;
+    padding: 7px 16px;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 8px;
+    /* flex-shrink: 0; */
+    color: white;
+    font-weight: bold;
+    border-radius: 100px;
+    background: linear-gradient(135deg, #ED6D31 0%, #EB4432 100%);
+    /* box-shadow: 0px 0.3990061283111572px 1.9285296201705933px 0px rgba(255, 255, 255, 0.03), 0px 1.3401784896850586px 6.477529525756836px 0px rgba(255, 255, 255, 0.04), 0px 6px 29px 0px rgba(255, 255, 255, 0.07); */
+    align-items: center;
+    /* margin-top: 12px;
+    margin-left: 0.4rem; */
+    z-index: 9;
+    font-size: 15px;
+    border: unset;
+    width: 130px;
+    height: 40px;
+    position: fixed;
+    top: 530px;
+}
+
+button.join-button:hover {
+    cursor: pointer;
+    box-shadow: rgb(255, 255, 255) 0px 0px 3px;
+  }
