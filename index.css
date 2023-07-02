@@ -1,17 +1,14 @@
 html, body {
     height: 100%;
     width: 100%;
-    margin: 0;
-    padding: 0;
+    /* margin: 0;
+    padding: 0; */
     background: #0D0D0D;
-    display: flex;
+    /* display: flex; */
     /* overflow: hidden; */
   }
 
-/* body {
-    background: #0D0D0D;
-    display: flex;
-} */
+  
 .left-section {
     position: relative;
     display: flex;
@@ -30,33 +27,6 @@ html, body {
     position: absolute;
 }
 
-/* div.launching-soon {
-    display: grid;
-    top: 105px;
-    position: relative;
-}
-
-div.launching-soon span{
-    color: #FFF;
-    font-size: 64px;
-    font-family: Proxima Nova;
-    font-weight: 800;
-    line-height: 76px;
-}
-
-div.launching-soon span:nth-child(2) {
-    background: linear-gradient(to right, rgba(237, 109, 49, 1), rgba(235, 68, 50, 1));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    font-size: 64px;
-    font-family: Proxima Nova;
-    font-weight: 800;
-    line-height: 76px;
-    width: 300px;
-} */
-
 img.we-are-launching-soon {
     width: 308px;
     top: 105px;
@@ -70,7 +40,9 @@ div.join-waitlist {
     font-weight: 500;
     line-height: 32px;
     position: absolute;
-    top: 450px;
+    top: 28rem;
+    max-width: 36rem;
+    min-width: 20rem;
 }
 
 div.footer-line {
@@ -87,8 +59,11 @@ div.social-media {
     gap: 24px;
     /* bottom: 375px; */
     justify-content: center;
-    position: relative;
-    top: 0px;
+    /* position: relative;
+    top: 0px; */
+    position: absolute;
+    top: 41rem;
+    left: 8rem;
 }
 
 div.right-section {
@@ -96,39 +71,24 @@ div.right-section {
 }
 
 div.right-section img {
-    position: absolute;
+    /* position: absolute; */
     bottom: 0px;
     left: 50%;
 }
 
 img.launching-soon2 {
-    /* color: rgba(173, 159, 159, 0.12); */
-    /* text-align: center;
-    font-size: 123px;
-    font-family: Proxima Nova;
-    font-weight: 700; */
-    /* line-height: 47px; */
+    display: none;
     position: absolute;
     /* top: 92%; */
     bottom: 0px;
+    
 }
 
 img.launching-soon1 {
     position: absolute;
     right: 0px;
+    top: 0px;
 }
-
-/* div.launching-soon-text {
-    color: rgba(173, 159, 159, 0.12);
-    text-align: center;
-    font-size: 123px;
-    font-family: Proxima Nova;
-    font-weight: 700;
-    line-height: 47px;
-    z-index: 2;
-    position: absolute;
-    top: 92%;
-} */
 
 button.join-button {
     /* width: 70px;
@@ -152,11 +112,53 @@ button.join-button {
     border: unset;
     width: 130px;
     height: 40px;
-    position: fixed;
-    top: 530px;
+    position: absolute;
+    top: 560px;
+    /* font-family: Proxima Nova; */
 }
 
 button.join-button:hover {
     cursor: pointer;
     box-shadow: rgb(255, 255, 255) 0px 0px 3px;
   }
+
+@media(min-width : 1360px) {
+    div.right-section img {
+        position: absolute;
+    }
+    html, body {
+        height: 100%;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        background: #0D0D0D;
+        display: flex;
+        overflow: hidden;
+      }
+
+      div.join-waitlist {
+        color: rgba(255, 255, 255, 0.64);
+        font-size: 20px;
+        font-family: Proxima Nova;
+        font-weight: 500;
+        line-height: 32px;
+        position: absolute;
+        top: 450px;
+    }
+
+    button.join-button{
+        top: 530px;
+    }
+    div.social-media {
+        position: relative;
+        top: 0px;
+    }
+
+    img.launching-soon2 {
+    position: absolute;
+    bottom: 0px;
+    display: block;
+    }
+    
+    
+}
