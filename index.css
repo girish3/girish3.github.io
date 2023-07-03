@@ -27,13 +27,14 @@ html, body {
     position: absolute;
 }
 
-img.we-are-launching-soon {
-    width: 308px;
-    top: 105px;
+img.headline_landing_page {
+    width: 509px;
+    top: 150px;
     position: relative;
+    filter: drop-shadow(10px 0px 100px #b73526);
 }
 
-div.join-waitlist {
+div.subheadline_landing_page {
     color: rgba(255, 255, 255, 0.64);
     font-size: 20px;
     font-family: Proxima Nova;
@@ -81,6 +82,7 @@ img.launching-soon2 {
     position: absolute;
     /* top: 92%; */
     bottom: 0px;
+    filter: blur(1px);
     
 }
 
@@ -88,11 +90,16 @@ img.launching-soon1 {
     position: absolute;
     right: 0px;
     top: 0px;
+    filter: blur(1px);
 }
 
 button.join-button {
     /* width: 70px;
     height: 40px; */
+    width: 230px;
+    height: 60px;
+    font-size: 22px;
+    border-radius: 8px;
     display: flex;
     padding: 7px 16px;
     justify-content: center;
@@ -101,17 +108,12 @@ button.join-button {
     /* flex-shrink: 0; */
     color: white;
     font-weight: bold;
-    border-radius: 100px;
     background: linear-gradient(135deg, #ED6D31 0%, #EB4432 100%);
-    /* box-shadow: 0px 0.3990061283111572px 1.9285296201705933px 0px rgba(255, 255, 255, 0.03), 0px 1.3401784896850586px 6.477529525756836px 0px rgba(255, 255, 255, 0.04), 0px 6px 29px 0px rgba(255, 255, 255, 0.07); */
     align-items: center;
     /* margin-top: 12px;
     margin-left: 0.4rem; */
     z-index: 9;
-    font-size: 15px;
     border: unset;
-    width: 130px;
-    height: 40px;
     position: absolute;
     top: 560px;
     /* font-family: Proxima Nova; */
@@ -119,8 +121,37 @@ button.join-button {
 
 button.join-button:hover {
     cursor: pointer;
-    box-shadow: rgb(255, 255, 255) 0px 0px 3px;
-  }
+}
+
+button.join-button span {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: 0.5s;
+}
+
+button.join-button span:after {
+    content: '\00bb';
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: -20px;
+    transition: 0.5s;
+}
+  
+button.join-button:hover span {
+    padding-right: 25px;
+}
+  
+button.join-button:hover span:after {
+    opacity: 1;
+    right: 0;
+}
+
+button.join-button:active {
+    cursor: pointer;
+    transform: translateY(4px);
+}
 
 @media(min-width : 1360px) {
     div.right-section img {
@@ -136,14 +167,14 @@ button.join-button:hover {
         overflow: hidden;
       }
 
-      div.join-waitlist {
-        color: rgba(255, 255, 255, 0.64);
+      div.subheadline_landing_page {
+        color: rgba(255, 255, 255, 0.44);
         font-size: 20px;
         font-family: Proxima Nova;
         font-weight: 500;
         line-height: 32px;
         position: absolute;
-        top: 450px;
+        top: 420px;
     }
 
     button.join-button{
