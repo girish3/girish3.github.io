@@ -16,6 +16,7 @@ html, body {
     box-sizing: border-box;
     height: 100%;
     padding: 120px;
+    padding-left: 10%;
     flex-direction: column;
     justify-content: space-between;
     /* align-items: center; */
@@ -23,7 +24,7 @@ html, body {
 }
 
 .superhr-logo{
-    left: 120px;
+    /* left: 120px; */
     position: absolute;
 }
 
