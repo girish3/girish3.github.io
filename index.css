@@ -15,21 +15,21 @@ html, body {
     width: 50%;
     box-sizing: border-box;
     height: 100%;
-    padding: 120px;
+    padding: 10%;
     flex-direction: column;
     justify-content: space-between;
     /* align-items: center; */
     flex-shrink: 0;
 }
 
-.superhr-logo{
-    left: 120px;
+img.superhr-logo{
+    /* left: 120px; */
     position: absolute;
 }
 
 img.headline_landing_page {
     width: 509px;
-    top: 150px;
+    top: 100px;
     position: relative;
     filter: drop-shadow(10px 0px 100px #b73526);
 }
@@ -182,7 +182,7 @@ button.join-button:active {
     }
     div.social-media {
         position: relative;
-        top: 0px;
+        top: 50px;
     }
 
     img.launching-soon2 {
@@ -192,4 +192,33 @@ button.join-button:active {
     }
     
     
+}
+
+@media(max-width : 500px) {
+    img.superhr-logo {
+        width: 204px;
+        top: 60px;
+        position: absolute;
+    }
+    img.headline_landing_page {
+        width: 272px;
+        top: 145px;
+        position: absolute;
+    }
+    div.subheadline_landing_page {
+        top: 250px;
+    }
+    div.right-section img {
+        /* position: absolute; */
+        bottom: 0px;
+        left: 50%;
+        width: 90%;
+    }
+    button.join-button {
+        width: 100%;
+        top: 380px;
+    }
+    div.social-media {
+        top: 480px;
+    }
 }
