@@ -15,7 +15,8 @@ html, body {
     width: 50%;
     box-sizing: border-box;
     height: 100%;
-    padding: 10%;
+    padding: 120px;
+    padding-left: 10%;
     flex-direction: column;
     justify-content: space-between;
     /* align-items: center; */
@@ -29,7 +30,7 @@ img.superhr-logo{
 
 img.headline_landing_page {
     width: 509px;
-    top: 100px;
+    top: 150px;
     position: relative;
     filter: drop-shadow(10px 0px 100px #b73526);
 }
@@ -75,6 +76,7 @@ div.right-section img {
     /* position: absolute; */
     bottom: 0px;
     left: 50%;
+    width: 45%;
 }
 
 img.launching-soon2 {
