@@ -57,7 +57,7 @@ div.footer-line {
 }
 
 div.social-media {
-    display: flex;
+    display: none;
     gap: 24px;
     /* bottom: 375px; */
     justify-content: center;
