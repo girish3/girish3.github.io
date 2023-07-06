@@ -54,6 +54,7 @@ div.footer-line {
     left: calc(50% - 380px/2);
     bottom: -130px;
     position: relative;
+    display: none;
 }
 
 div.social-media {
