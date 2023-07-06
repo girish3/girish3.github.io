@@ -77,6 +77,7 @@ div.right-section img {
     bottom: 0px;
     left: 50%;
     width: 45%;
+    max-width: 850px;
 }
 
 img.launching-soon2 {
