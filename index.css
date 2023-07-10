@@ -25,6 +25,7 @@ div.headings-section {
 img.superhr-logo {
     margin-bottom: 15%;
     min-width: 140px;
+    max-width: 300px;
     width: 50%;
 }
 
@@ -36,8 +37,8 @@ img.headline-landing-page {
 
 div.subheadline-landing-page {
     color: gray;
-    font-size: 100%;
-    font-family: "Proxima Nova";
+    font-size: 18px;
+    font-family: "Proxima Nova", sans-serif;
     font-weight: 500;
     line-height: 140%;
 }
