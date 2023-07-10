@@ -1,105 +1,49 @@
-html, body {
-    height: 100%;
-    width: 100%;
-    /* margin: 0;
-    padding: 0; */
-    background: #0D0D0D;
-    /* display: flex; */
-    /* overflow: hidden; */
-  }
-
-  
-.left-section {
-    position: relative;
+body {
     display: flex;
-    width: 50%;
-    box-sizing: border-box;
-    height: 100%;
-    padding: 120px;
-    padding-left: 10%;
+    background-color: black;
+    /* height: 100vh; */
+    color: white;
+    flex-direction: row;
+}
+
+div.superhr-left-section {
+    min-width: 50%;
+    min-height: 100vh;
+    padding: 10%;
+    display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    /* align-items: center; */
-    flex-shrink: 0;
+    box-sizing: border-box;
+    gap: 10vh;
 }
 
-img.superhr-logo{
-    /* left: 120px; */
-    position: absolute;
+div.headings-section {
+    display: flex;
+    flex-direction: column;
+    gap: 4vh;
 }
 
-img.headline_landing_page {
-    width: 509px;
-    top: 150px;
-    position: relative;
-    filter: drop-shadow(10px 0px 100px #b73526);
+img.superhr-logo {
+    margin-bottom: 15%;
+    min-width: 140px;
+    max-width: 300px;
+    width: 50%;
 }
 
-div.subheadline_landing_page {
-    color: rgba(255, 255, 255, 0.64);
-    font-size: 20px;
-    font-family: Proxima Nova;
+img.headline-landing-page {
+    filter: drop-shadow(10px 0px 60px #b73526);
+    min-width: 270px;
+    max-width: 550px;
+}
+
+div.subheadline-landing-page {
+    color: gray;
+    font-size: 18px;
+    font-family: "Proxima Nova", sans-serif;
     font-weight: 500;
-    line-height: 32px;
-    position: absolute;
-    top: 28rem;
-    max-width: 36rem;
-    min-width: 20rem;
-}
-
-div.footer-line {
-    width: 380px;
-    height: 1px;    
-    background: rgb(255, 255, 255, 0.04);
-    left: calc(50% - 380px/2);
-    bottom: -130px;
-    position: relative;
-    display: none;
-}
-
-div.social-media {
-    display: none;
-    gap: 24px;
-    /* bottom: 375px; */
-    justify-content: center;
-    /* position: relative;
-    top: 0px; */
-    position: absolute;
-    top: 41rem;
-    left: 8rem;
-}
-
-div.right-section {
-    width: 100%;
-}
-
-div.right-section img {
-    /* position: absolute; */
-    bottom: 0px;
-    left: 50%;
-    width: 45%;
-    max-width: 850px;
-}
-
-img.launching-soon2 {
-    display: none;
-    position: absolute;
-    /* top: 92%; */
-    bottom: 0px;
-    filter: blur(1px);
-    
-}
-
-img.launching-soon1 {
-    position: absolute;
-    right: 0px;
-    top: 0px;
-    filter: blur(1px);
+    line-height: 140%;
 }
 
 button.join-button {
-    /* width: 70px;
-    height: 40px; */
     width: 230px;
     height: 60px;
     font-size: 22px;
@@ -109,18 +53,15 @@ button.join-button {
     justify-content: center;
     align-items: flex-start;
     gap: 8px;
-    /* flex-shrink: 0; */
+ 
     color: white;
     font-weight: bold;
     background: linear-gradient(135deg, #ED6D31 0%, #EB4432 100%);
     align-items: center;
-    /* margin-top: 12px;
-    margin-left: 0.4rem; */
+ 
     z-index: 9;
     border: unset;
-    position: absolute;
-    top: 560px;
-    /* font-family: Proxima Nova; */
+    margin: -40px 0 10px 0 ;
 }
 
 button.join-button:hover {
@@ -157,72 +98,49 @@ button.join-button:active {
     transform: translateY(4px);
 }
 
-@media(min-width : 1360px) {
-    div.right-section img {
-        position: absolute;
-    }
-    html, body {
-        height: 100%;
-        width: 100%;
-        margin: 0;
-        padding: 0;
-        background: #0D0D0D;
-        display: flex;
-        overflow: hidden;
-      }
+div.superhr-right-section {
+    min-width: 50%;
+    min-height: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-end;
+    justify-content: center;
+}
 
-      div.subheadline_landing_page {
-        color: rgba(255, 255, 255, 0.44);
-        font-size: 20px;
-        font-family: Proxima Nova;
-        font-weight: 500;
-        line-height: 32px;
-        position: absolute;
-        top: 420px;
+div.superhr-right-section img {
+    width: 70%;
+    max-width: 560px;
+    min-width: 240px;
+}
+
+div.social-media {
+    display: flex;
+    flex-direction: row;
+    gap: 24px;
+    margin-left: 50%;
+}
+
+@media (max-width: 600px) {
+    body {
+      display: unset;
+    }
+    div.superhr-left-section {
+        min-height: unset;
+    }
+    div.superhr-right-section img {
+        width: 90%;
+        margin-bottom: -40px;
+        height: auto;
     }
 
     button.join-button{
-        top: 530px;
-    }
-    div.social-media {
-        position: relative;
-        top: 50px;
+        max-width: 160px;
+        max-height: 45px;
+        font-size: 16px;
+        margin-top: -13px;
     }
 
-    img.launching-soon2 {
-    position: absolute;
-    bottom: 0px;
-    display: block;
-    }
-    
-    
-}
-
-@media(max-width : 500px) {
-    img.superhr-logo {
-        width: 204px;
-        top: 60px;
-        position: absolute;
-    }
-    img.headline_landing_page {
-        width: 272px;
-        top: 145px;
-        position: absolute;
-    }
-    div.subheadline_landing_page {
-        top: 250px;
-    }
-    div.right-section img {
-        /* position: absolute; */
-        bottom: 0px;
-        left: 50%;
-        width: 90%;
-    }
-    button.join-button {
-        width: 100%;
-        top: 380px;
-    }
-    div.social-media {
-        top: 480px;
+    div.social-media  {
+        margin: auto;
     }
 }
