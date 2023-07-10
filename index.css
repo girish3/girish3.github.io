@@ -31,6 +31,7 @@ img.superhr-logo {
 img.headline-landing-page {
     filter: drop-shadow(10px 0px 60px #b73526);
     min-width: 270px;
+    max-width: 550px;
 }
 
 div.subheadline-landing-page {
