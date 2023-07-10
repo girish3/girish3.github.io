@@ -8,7 +8,7 @@ body {
 
 div.superhr-left-section {
     min-width: 50%;
-    min-height: 100%;
+    min-height: 100vh;
     padding: 10%;
     display: flex;
     flex-direction: column;
@@ -122,7 +122,9 @@ div.social-media {
     body {
       display: unset;
     }
-    
+    div.superhr-left-section {
+        min-height: unset;
+    }
     div.superhr-right-section img {
         width: 90%;
         margin-bottom: -40px;
